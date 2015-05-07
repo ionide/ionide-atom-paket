@@ -1,3 +1,6 @@
+### 0.1.6 - 07.05.2015
+* Fix deprecated API calls
+
 #### 0.1.5 - 07.05.2015
 * Add screencast to readme
 
