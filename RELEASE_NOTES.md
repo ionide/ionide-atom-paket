@@ -1,3 +1,6 @@
+### 0.1.7 - 07.05.2015
+* Test full release cycle
+
 ### 0.1.6 - 07.05.2015
 * Fix deprecated API calls
 
