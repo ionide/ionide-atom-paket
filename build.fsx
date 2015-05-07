@@ -9,6 +9,7 @@ open System.IO
 open Fake
 open Fake.Git
 open Fake.ProcessHelper
+open Fake.ReleaseNotesHelper
 open Fake.ZipHelper
 
 #if MONO
@@ -20,6 +21,24 @@ open Fake.ZipHelper
 #load "src/main.fs"
 
 #endif
+
+// Git configuration (used for publishing documentation in gh-pages branch)
+// The profile where the project is posted
+let gitOwner = "fsprojects"
+let gitHome = "https://github.com/" + gitOwner
+
+// The name of the project on GitHub
+let gitName = "Paket.Atom"
+
+// The url for the raw files hosted
+let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/fsprojects"
+
+// Read additional information from the release notes document
+let releaseNotesData = 
+    File.ReadAllLines "RELEASE_NOTES.md"
+    |> parseAllReleaseNotes
+
+let release = List.head releaseNotesData
 
 // --------------------------------------------------------------------------------------
 // Build the Generator project and run it
@@ -107,13 +126,32 @@ Target "GenerateBindings" (fun () ->
     |> ignore
 )
 
+Target "Release" (fun _ ->
+    let tempReleaseDir = "temp/release"
+    CleanDir tempReleaseDir
+    Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "master" tempReleaseDir
+
+    CopyRecursive "src/paket" tempReleaseDir true |> tracefn "%A"    
+    
+    StageAll tempReleaseDir
+    Git.Commit.Commit tempReleaseDir (sprintf "Releasing %s" release.NugetVersion)
+    Branches.push tempReleaseDir
+)
+
 // --------------------------------------------------------------------------------------
 // Run generator by default. Invoke 'build <Target>' to override
 // --------------------------------------------------------------------------------------
 
+Target "Default" DoNothing
+
 #if MONO
-"BuildGenerator" ==> "RunGenerator"
-RunTargetOrDefault "RunGenerator"
+"BuildGenerator" 
+  ==> "RunGenerator"
+  ==> "Default"
+  ==> "Release"
 #else
-RunTargetOrDefault "RunScript"
+"RunScript"
+  ==> "Default"
+  ==> "Release"
 #endif
+RunTargetOrDefault "Default"
