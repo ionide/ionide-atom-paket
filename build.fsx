@@ -148,8 +148,9 @@ Target "TagDevelopBranch" (fun _ ->
     Git.Commit.Commit "" (sprintf "Bump version to %s" release.NugetVersion)
     Branches.pushBranch "" "origin" "develop"
 
-    Branches.tag "" ("develop-" + release.NugetVersion)
-    Branches.pushTag "" "origin" release.NugetVersion
+    let tagName = "develop-" + release.NugetVersion
+    Branches.tag "" tagName
+    Branches.pushTag "" "origin" tagName
 )
 
 
