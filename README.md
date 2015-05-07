@@ -10,7 +10,7 @@
 
 ## Contributing and copyright
 
-The project is hosted on [GitHub][https://github.com/fsprojects/Paket.Atom] where you can [report issues][https://github.com/fsprojects/Paket.Atom/issues], fork 
+The project is hosted on [GitHub](https://github.com/fsprojects/Paket.Atom) where you can [report issues](https://github.com/fsprojects/Paket.Atom/issues), fork 
 the project and submit pull requests on the [develop branch](https://github.com/fsprojects/Paket.Atom/tree/develop).
 
 The library is available under [Apache 2 license](https://github.com/fsprojects/Paket.Atom/blob/master/LICENSE.md), which allows modification and 
