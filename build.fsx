@@ -138,14 +138,19 @@ Target "InstallDependencies" (fun _ ->
     if result <> 0 then failwithf "Error during running apm with %s" args
 )
 
-
 Target "Release" (fun _ ->
     let tempReleaseDir = "temp/release"
     CleanDir tempReleaseDir
     Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "master" tempReleaseDir
 
-    //CleanDirExceptGitFolder tempReleaseDir
+    let cleanEverythingFromLastCheckout() =
+        let tempGitDir = Path.GetTempPath() </> "gitrelease"
+        CleanDir tempGitDir
+        CopyRecursive (tempReleaseDir </> ".git") tempGitDir true |> ignore
+        CleanDir tempReleaseDir
+        CopyRecursive tempGitDir (tempReleaseDir  </> ".git") true |> ignore
 
+    cleanEverythingFromLastCheckout()    
     CopyRecursive "src/paket" tempReleaseDir true |> tracefn "%A"    
     
     StageAll tempReleaseDir
