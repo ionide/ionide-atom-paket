@@ -208,7 +208,7 @@ type Paket() =
         PaketService.PackageView.packagesListView <- PaketService.PackageView.registerPackagesListView ()
         PaketService.PackageView.versionsListView <- PaketService.PackageView.registerVersionListView ()
         PaketService.UpdatePaketSilent()
-        Atom.addCommand("atom-workspace", "Paket: Update Paket", PaketService.UpdatePaket)
+        Atom.addCommand("atom-workspace", "Paket: Update Paket.exe", PaketService.UpdatePaket)
         Atom.addCommand("atom-workspace", "Paket: Init", PaketService.Init)
         Atom.addCommand("atom-workspace", "Paket: Install", PaketService.Install)
         Atom.addCommand("atom-workspace", "Paket: Update", PaketService.Update)
