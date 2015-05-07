@@ -32,6 +32,8 @@ let gitName = "Paket.Atom"
 // The url for the raw files hosted
 let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/fsprojects"
 
+let tempReleaseDir = "temp/release"
+
 // Read additional information from the release notes document
 let releaseNotesData = 
     File.ReadAllLines "RELEASE_NOTES.md"
@@ -45,7 +47,10 @@ let apmTool = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicati
 // Build the Generator project and run it
 // --------------------------------------------------------------------------------------
 
-DeleteFile "src/paket/bin/paket.exe"
+Target "Clean" (fun _ ->
+    DeleteFile "src/paket/bin/paket.exe"
+    CopyFile "src/paket" "README.md"
+)
 
 Target "BuildGenerator" (fun () ->
     [ __SOURCE_DIRECTORY__ @@ "src" @@ "FSharp.Atom.Generator.fsproj" ]
@@ -127,8 +132,6 @@ Target "GenerateBindings" (fun () ->
 )
 
 Target "InstallDependencies" (fun _ ->
-    CopyFile "src/paket" "README.md"
-
     let args = "install"
     
     let srcDir = "src/paket"
@@ -140,8 +143,17 @@ Target "InstallDependencies" (fun _ ->
     if result <> 0 then failwithf "Error during running apm with %s" args
 )
 
-Target "Release" (fun _ ->
-    let tempReleaseDir = "temp/release"
+Target "TagDevelopBranch" (fun _ ->
+    StageAll ""
+    Git.Commit.Commit "" (sprintf "Bump version to %s" release.NugetVersion)
+    Branches.pushBranch "" "origin" "develop"
+
+    Branches.tag "" ("develop-" + release.NugetVersion)
+    Branches.pushTag "" "origin" release.NugetVersion
+)
+
+
+Target "PushToMaster" (fun _ ->
     CleanDir tempReleaseDir
     Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "master" tempReleaseDir
 
@@ -156,9 +168,11 @@ Target "Release" (fun _ ->
     CopyRecursive "src/paket" tempReleaseDir true |> tracefn "%A"    
     
     StageAll tempReleaseDir
-    Git.Commit.Commit tempReleaseDir (sprintf "Releasing %s" release.NugetVersion)
+    Git.Commit.Commit tempReleaseDir (sprintf "Release %s" release.NugetVersion)
     Branches.push tempReleaseDir
+)
 
+Target "Release" (fun _ ->
     let args = sprintf "publish %s" release.NugetVersion
     let result =
         ExecProcess (fun info ->
@@ -175,16 +189,20 @@ Target "Release" (fun _ ->
 Target "Default" DoNothing
 
 #if MONO
-"BuildGenerator" 
+"Clean"
+  ==> "BuildGenerator" 
   ==> "RunGenerator"
   ==> "InstallDependencies"
 #else
-"RunScript"
+"Clean"
+  ==> "RunScript"
   ==> "InstallDependencies"
 #endif
 
 "InstallDependencies"
   ==> "Default"
+  ==> "TagDevelopBranch"
+  ==> "PushToMaster"
   ==> "Release"
 
 RunTargetOrDefault "Default"
