@@ -144,7 +144,7 @@ Target "Release" (fun _ ->
     CleanDir tempReleaseDir
     Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "master" tempReleaseDir
 
-    //CleanDirExceptGitFolder tempReleaseDir
+    CleanDirExceptGitFolder tempReleaseDir
 
     CopyRecursive "src/paket" tempReleaseDir true |> tracefn "%A"    
     
