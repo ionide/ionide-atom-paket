@@ -39,6 +39,8 @@ let releaseNotesData =
 
 let release = List.head releaseNotesData
 
+let apmTool = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "atom" </> "bin" </> "apm.cmd"
+
 // --------------------------------------------------------------------------------------
 // Build the Generator project and run it
 // --------------------------------------------------------------------------------------
@@ -64,7 +66,6 @@ Target "RunScript" (fun () ->
     Paket.Atom.Generator.translateModules()  
 )
 #endif
-
 
 // --------------------------------------------------------------------------------------
 // Generate FunScript bindings from the *.d.ts files in the 'typings' folder
@@ -125,6 +126,19 @@ Target "GenerateBindings" (fun () ->
     |> ignore
 )
 
+Target "InstallDependencies" (fun _ ->
+    let args = "install"
+    
+    let srcDir = "src/paket"
+    let result =
+        ExecProcess (fun info ->
+            info.FileName <- apmTool
+            info.WorkingDirectory <- srcDir
+            info.Arguments <- args) System.TimeSpan.MaxValue
+    if result <> 0 then failwithf "Error during running apm with %s" args
+)
+
+
 Target "Release" (fun _ ->
     let tempReleaseDir = "temp/release"
     CleanDir tempReleaseDir
@@ -138,7 +152,6 @@ Target "Release" (fun _ ->
     Git.Commit.Commit tempReleaseDir (sprintf "Releasing %s" release.NugetVersion)
     Branches.push tempReleaseDir
 
-    let apmTool = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "atom" </> "bin" </> "apm.cmd"
     let args = sprintf "publish %s" release.NugetVersion
     let result =
         ExecProcess (fun info ->
@@ -157,11 +170,14 @@ Target "Default" DoNothing
 #if MONO
 "BuildGenerator" 
   ==> "RunGenerator"
-  ==> "Default"
-  ==> "Release"
+  ==> "InstallDependencies"
 #else
 "RunScript"
+  ==> "InstallDependencies"
+#endif
+
+"InstallDependencies"
   ==> "Default"
   ==> "Release"
-#endif
+
 RunTargetOrDefault "Default"
