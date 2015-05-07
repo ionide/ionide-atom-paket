@@ -143,6 +143,7 @@ Target "Release" (fun _ ->
     let result =
         ExecProcess (fun info ->
             info.FileName <- apmTool
+            info.WorkingDirectory <- tempReleaseDir
             info.Arguments <- args) System.TimeSpan.MaxValue
     if result <> 0 then failwithf "Error during running apm with %s" args
 )
