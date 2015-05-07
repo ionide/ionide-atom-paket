@@ -40,7 +40,6 @@ module PaketService =
     let handle error input =
         let output = input.ToString()
         Globals.console.log(output)
-        Globals.atom.emit("FSharp:Output", output)
         if error then
             notice true "Paket error" output
         else
