@@ -130,11 +130,21 @@ Target "Release" (fun _ ->
     CleanDir tempReleaseDir
     Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "master" tempReleaseDir
 
+    CleanDirExceptGitFolder tempReleaseDir
+
     CopyRecursive "src/paket" tempReleaseDir true |> tracefn "%A"    
     
     StageAll tempReleaseDir
     Git.Commit.Commit tempReleaseDir (sprintf "Releasing %s" release.NugetVersion)
     Branches.push tempReleaseDir
+
+    let apmTool = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "atom" </> "bin" </> "apm.cmd"
+    let args = sprintf "publish %s" release.NugetVersion
+    let result =
+        ExecProcess (fun info ->
+            info.FileName <- apmTool
+            info.Arguments <- args) System.TimeSpan.MaxValue
+    if result <> 0 then failwithf "Error during running apm with %s" args
 )
 
 // --------------------------------------------------------------------------------------
