@@ -15,7 +15,6 @@ open Fake.ZipHelper
 #else
 #load "src/atom-bindings.fsx"
 #load "src/atom-extra.fs"
-#load "src/core.fs"
 #load "src/paket.fs"
 #load "src/main.fs"
 
@@ -43,7 +42,7 @@ Target "RunGenerator" (fun () ->
 #if MONO
 #else
 Target "RunScript" (fun () -> 
-    FSharp.Atom.Generator.translateModules()  
+    Paket.Atom.Generator.translateModules()  
 )
 #endif
 
