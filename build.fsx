@@ -127,6 +127,8 @@ Target "GenerateBindings" (fun () ->
 )
 
 Target "InstallDependencies" (fun _ ->
+    CopyFile "src/paket" "README.md"
+
     let args = "install"
     
     let srcDir = "src/paket"

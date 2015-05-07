@@ -37,9 +37,6 @@
     <Compile Include="paket.fs" />
     <Compile Include="main.fs" />
     <None Include="atom-bindings.fsx" />
-    <None Include="paket\README.md">
-      <Link>README.md</Link>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

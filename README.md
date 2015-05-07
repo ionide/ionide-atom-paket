@@ -1,23 +1,24 @@
-##FSharp.Atom
-![FSharp.Atom](https://raw.githubusercontent.com/Krzysztof-Cieslak/FSharp.Atom/master/gifs/ErrorPanel.png)
+# Paket.Atom
 
-## Installation
-
-* install "language-fsharp" package using APM or Atom UI
-* install "autocomplete-plus" package using APM or Atom UI (disable build-in atom autocomplete for best experience)
-* clone / download this repository
-* Open `src/core` with Atom and run Update Package Dependencies" from Atom command palette. Do the same for `src\paket`
-* Run `build.cmd` (for Windows) or `build.sh` (for Linux / Mac ) to build project
-* copy `src/core` and `src/paket` to Atom package folder
-
-OR (for easy development)
-
-* create symbolic directory link beween both `src/core` and `src/paket` and Atom package folder
+[Paket](https://github.com/fsprojects/Paket) is package dependency manager for .NET with support for NuGet packages and GitHub repositories.
 
 ## Features
 
-- Auto completions
-- Error highlighting and error list in bottom panel
-- Tooltips
-- Support for script files or F# projects
-- Basic support for [Paket](http://fsprojects.github.io/Paket/).
+- Paket commands available in Atom's Command Palette
+
+![Paket add](https://raw.githubusercontent.com/fsprojects/Paket.Atom/master/img/paket-add-atom.gif)
+
+## Contributing and copyright
+
+The project is hosted on [GitHub][https://github.com/fsprojects/Paket.Atom] where you can [report issues][https://github.com/fsprojects/Paket.Atom/issues], fork 
+the project and submit pull requests on the [develop branch](https://github.com/fsprojects/Paket.Atom/tree/develop).
+
+The library is available under [Apache 2 license](https://github.com/fsprojects/Paket.Atom/blob/master/LICENSE.md), which allows modification and 
+redistribution for both commercial and non-commercial purposes.
+
+### Maintainer(s)
+
+- [@Krzysztof-Cieslak](https://github.com/Krzysztof-Cieslak)
+- [@forki](https://github.com/forki)
+
+The default maintainer account for projects under "fsprojects" is [@fsgit](https://github.com/fsgit) - F# Community Project Incubation Space (repo management)
