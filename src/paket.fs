@@ -62,7 +62,7 @@ module PaketService =
 
     let spawn location (cmd : string) =
         let cmd' = cmd.Split(' ');
-        let options = {cwd = Globals.atom.project.getPath()} |> unbox<AnonymousType599>
+        let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType599>
         let procs = if Globals._process.platform.StartsWith("win") then
                         Globals.spawn(location, cmd', options)
                     else
@@ -76,7 +76,7 @@ module PaketService =
         ()
 
     let exec location cmd handler = 
-        let options = {cwd = Globals.atom.project.getPath()} |> unbox<AnonymousType600>
+        let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType600>
         
         let child =
             if Globals._process.platform.StartsWith("win") then
