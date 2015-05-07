@@ -160,12 +160,6 @@ Target "PushToMaster" (fun _ ->
 
     Git.CommandHelper.runSimpleGitCommand tempReleaseDir "rm . -f -r" |> ignore
     CopyRecursive "src/paket" tempReleaseDir true |> tracefn "%A"
-
-    // Set version in package.json
-    let packageFile = tempReleaseDir </> "package.json"
-    File.WriteAllText(packageFile,
-        File.ReadAllText(packageFile)
-            .Replace("""  "version": "0.0.0",""",sprintf """  "version": "%s",""" release.NugetVersion))
    
     StageAll tempReleaseDir
     Git.Commit.Commit tempReleaseDir (sprintf "Release %s" release.NugetVersion)
