@@ -1,5 +1,8 @@
-### 0.1.9 - 07.05.2015
-* Implement Remove Package command
+### 0.1.10 - 08.05.2015
+* Implement "Update Package" command
+
+### 0.1.9 - 08.05.2015
+* Implement "Remove Package" command
 
 ### 0.1.8 - 07.05.2015
 * Test full release cycle

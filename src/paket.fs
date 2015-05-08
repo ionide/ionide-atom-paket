@@ -99,7 +99,8 @@ module PaketService =
         let mutable packagesListView : (atom.SelectListView * IPanel) option = None
         let mutable versionsListView : (atom.SelectListView * IPanel) option = None
         let mutable removeListView : (atom.SelectListView * IPanel) option = None
-        let mutable removeProject = false
+        let mutable updatePackageListView : (atom.SelectListView * IPanel) option = None
+        let mutable inCurrentProject = false
       
         type ItemDescription = {
             data : string
@@ -191,7 +192,7 @@ module PaketService =
             let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) -> 
                                         name <- packageDescription.data.Split(' ').[0].Trim()
                                         removeListView |> Option.iter (fun (model, view) -> view.hide())
-                                        if removeProject |> not then
+                                        if inCurrentProject |> not then
                                             "remove nuget " + name |> spawnPaket :> obj
                                         else
                                             let projectStr =  
@@ -200,6 +201,26 @@ module PaketService =
                                                 " project \"" + path + "\""
                                                 
                                             "remove nuget " + name + projectStr |> spawnPaket :> obj)
+
+            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+
+        let registerUpdatePackageListView () = 
+            let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
+
+            let cancelledCallback = Func<_>(fun _ -> updatePackageListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
+
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) -> 
+                                        name <- packageDescription.data.Split(' ').[0].Trim()
+                                        updatePackageListView |> Option.iter (fun (model, view) -> view.hide())
+                                        if inCurrentProject |> not then
+                                            "update nuget " + name |> spawnPaket :> obj
+                                        else
+                                            let projectStr =  
+                                                if not settings.AddToCurrentProject then "" else
+                                                let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
+                                                " project \"" + path + "\""
+                                                
+                                            "update nuget " + name + projectStr |> spawnPaket :> obj)
 
             regiterListView stopChangingCallback cancelledCallback confirmedCallback false
             
@@ -219,10 +240,10 @@ module PaketService =
         view.show()
         model.focusFilterEditor() |> ignore)
 
-    let Remove project () = 
-        PackageView.removeProject <- project
+    let Remove inCurrentProject () = 
+        PackageView.inCurrentProject <- inCurrentProject
         PackageView.removeListView |> Option.iter(fun (model, view) ->
-        let cmd = if project |> not then
+        let cmd = if inCurrentProject |> not then
                         "show-installed-packages -s"
                   else
                         let projectStr =  
@@ -235,6 +256,23 @@ module PaketService =
 
         )
 
+    let UpdatePackage inCurrentProject () = 
+        PackageView.inCurrentProject <- inCurrentProject
+        PackageView.updatePackageListView |> Option.iter(fun (model, view) ->
+        let cmd = if inCurrentProject |> not then
+                        "show-installed-packages -s"
+                  else
+                        let projectStr =  
+                            let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
+                            " project \"" + path + "\""
+                        "show-installed-packages" + projectStr + " -s"
+        execPaket cmd (Func<_,_,_,_>(PackageView.handlerAddItems model))
+        view.show()
+        model.focusFilterEditor() |> ignore
+
+        )
+
+
 type Paket() =
 
 
@@ -242,6 +280,7 @@ type Paket() =
         PaketService.PackageView.packagesListView <- PaketService.PackageView.registerPackagesListView () |> Some
         PaketService.PackageView.versionsListView <- PaketService.PackageView.registerVersionListView () |> Some
         PaketService.PackageView.removeListView <- PaketService.PackageView.registerRemoveListView () |> Some
+        PaketService.PackageView.updatePackageListView <- PaketService.PackageView.registerUpdatePackageListView () |> Some
         PaketService.UpdatePaketSilent()
         Atom.addCommand("atom-workspace", "Paket: Update Paket.exe", PaketService.UpdatePaket)
         Atom.addCommand("atom-workspace", "Paket: Init", PaketService.Init)
@@ -254,6 +293,8 @@ type Paket() =
         Atom.addCommand("atom-workspace", "Paket: Add NuGet Package Version", PaketService.Add { Versioned =  true; AddToCurrentProject = false })
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package", PaketService.Remove false)
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package (from current project)", PaketService.Remove true )
+        Atom.addCommand("atom-workspace", "Paket: Update NuGet Package", PaketService.UpdatePackage false)
+        Atom.addCommand("atom-workspace", "Paket: Update NuGet Package (from current project)", PaketService.UpdatePackage true )
         
         ()
 
