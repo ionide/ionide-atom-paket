@@ -87,10 +87,6 @@ module PaketService =
 
     let execPaket cmd handler = exec location cmd handler
     let spawnPaket cmd = spawn location cmd
-
-
-
-
     
     type PackageAddSettings = {
         Versioned : bool
@@ -102,6 +98,8 @@ module PaketService =
         let mutable settings = { Versioned =  false; AddToCurrentProject = false }
         let mutable packagesListView : (atom.SelectListView * IPanel) option = None
         let mutable versionsListView : (atom.SelectListView * IPanel) option = None
+        let mutable removeListView : (atom.SelectListView * IPanel) option = None
+        let mutable removeProject = false
       
         type ItemDescription = {
             data : string
@@ -143,7 +141,7 @@ module PaketService =
             do listView.``cancelled <-``(cancelledCallback)
             do listView.``confirmed <-`` (confirmedCallback)
 
-            Some (listView,panel)
+            listView,panel
 
         let registerPackagesListView () = 
             let stopChangingCallback (ev : IEditor) lv = fun () -> 
@@ -185,6 +183,26 @@ module PaketService =
                 )
             regiterListView stopChangingCallback cancelledCallback confirmedCallback false
 
+        let registerRemoveListView () = 
+            let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
+
+            let cancelledCallback = Func<_>(fun _ -> removeListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
+
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) -> 
+                                        name <- packageDescription.data.Split(' ').[0].Trim()
+                                        removeListView |> Option.iter (fun (model, view) -> view.hide())
+                                        if removeProject |> not then
+                                            "remove nuget " + name |> spawnPaket :> obj
+                                        else
+                                            let projectStr =  
+                                                if not settings.AddToCurrentProject then "" else
+                                                let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
+                                                " project \"" + path + "\""
+                                                
+                                            "remove nuget " + name + projectStr |> spawnPaket :> obj)
+
+            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            
 
 
     let UpdatePaket () = spawn bootstrapperLocation ""
@@ -201,12 +219,29 @@ module PaketService =
         view.show()
         model.focusFilterEditor() |> ignore)
 
+    let Remove project () = 
+        PackageView.removeProject <- project
+        PackageView.removeListView |> Option.iter(fun (model, view) ->
+        let cmd = if project |> not then
+                        "show-installed-packages -s"
+                  else
+                        let projectStr =  
+                            let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
+                            " project \"" + path + "\""
+                        "show-installed-packages" + projectStr + " -s"
+        execPaket cmd (Func<_,_,_,_>(PackageView.handlerAddItems model))
+        view.show()
+        model.focusFilterEditor() |> ignore
+
+        )
+
 type Paket() =
 
 
     member x.activate(state:obj) =
-        PaketService.PackageView.packagesListView <- PaketService.PackageView.registerPackagesListView ()
-        PaketService.PackageView.versionsListView <- PaketService.PackageView.registerVersionListView ()
+        PaketService.PackageView.packagesListView <- PaketService.PackageView.registerPackagesListView () |> Some
+        PaketService.PackageView.versionsListView <- PaketService.PackageView.registerVersionListView () |> Some
+        PaketService.PackageView.removeListView <- PaketService.PackageView.registerRemoveListView () |> Some
         PaketService.UpdatePaketSilent()
         Atom.addCommand("atom-workspace", "Paket: Update Paket.exe", PaketService.UpdatePaket)
         Atom.addCommand("atom-workspace", "Paket: Init", PaketService.Init)
@@ -217,6 +252,9 @@ type Paket() =
         Atom.addCommand("atom-workspace", "Paket: Add NuGet Package", PaketService.Add { Versioned =  false; AddToCurrentProject = false })
         Atom.addCommand("atom-workspace", "Paket: Add NuGet Package (to current project)", PaketService.Add { Versioned =  false; AddToCurrentProject = true })
         Atom.addCommand("atom-workspace", "Paket: Add NuGet Package Version", PaketService.Add { Versioned =  true; AddToCurrentProject = false })
+        Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package", PaketService.Remove false)
+        Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package (from current project)", PaketService.Remove true )
+        
         ()
 
     member x.deactivate() =
