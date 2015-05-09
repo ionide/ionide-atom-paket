@@ -4,6 +4,7 @@
 
 ## Features
 
+- Syntax highlighting for `paket.dependencies`
 - Paket commands available in Atom's Command Palette
 
 ![Paket add](https://raw.githubusercontent.com/fsprojects/Paket.Atom/master/img/paket-add-atom.gif)

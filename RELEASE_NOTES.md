@@ -1,4 +1,4 @@
-### 0.2.0 - 08.05.2015
+### 0.2.1 - 09.05.2015
 * Syntax highlighting for paket.dependencies
 
 ### 0.1.10 - 08.05.2015
