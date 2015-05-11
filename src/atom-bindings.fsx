@@ -1,9 +1,10 @@
 // --------------------------------------------------------------------------------------
-// Reference all the TypeScript mappings Atom pacakge might need
+// Reference all the TypeScript mappings Atom package might need
 // --------------------------------------------------------------------------------------
 
 #if INTERACTIVE
 #I "../lib"
+#I "../packages/FunScript/lib/net40"
 
 #r "FunScript.dll" 
 #r "FunScript.Interop.dll"
