@@ -1,3 +1,8 @@
+### 0.2.2 - 12.05.2015
+* Implement `Auto Resotore` command
+* Implement `Simplify` command
+* Implement `Convert From Nuget` command
+
 ### 0.2.1 - 09.05.2015
 * Syntax highlighting for paket.dependencies
 
