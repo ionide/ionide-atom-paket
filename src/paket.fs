@@ -233,6 +233,10 @@ module PaketService =
     let Update () = "update" |> spawnPaket
     let Outdated () = "outdated" |> spawnPaket
     let Restore () = "restore" |> spawnPaket
+    let AutoRestoreOn () = "auto-restore on" |> spawnPaket
+    let AutoRestoreOff () = "auto-restore off" |> spawnPaket
+    let ConvertFromNuget () = "convert-from-nuget" |> spawnPaket
+    let Simplify () = "simplify" |> spawnPaket
 
     let Add settings () =
         PackageView.settings <- settings
@@ -295,7 +299,11 @@ type Paket() =
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package (from current project)", PaketService.Remove true )
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package", PaketService.UpdatePackage false)
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package (from current project)", PaketService.UpdatePackage true )
-        
+        Atom.addCommand("atom-workspace", "Paket: Auto Resotore On", PaketService.AutoRestoreOn)
+        Atom.addCommand("atom-workspace", "Paket: Auto Resotore Off", PaketService.AutoRestoreOff)
+        Atom.addCommand("atom-workspace", "Paket: Simplify", PaketService.Simplify)
+        Atom.addCommand("atom-workspace", "Paket: Convert From Nuget", PaketService.ConvertFromNuget)
+
         ()
 
     member x.deactivate() =
