@@ -299,8 +299,8 @@ type Paket() =
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package (from current project)", PaketService.Remove true )
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package", PaketService.UpdatePackage false)
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package (from current project)", PaketService.UpdatePackage true )
-        Atom.addCommand("atom-workspace", "Paket: Auto Resotore On", PaketService.AutoRestoreOn)
-        Atom.addCommand("atom-workspace", "Paket: Auto Resotore Off", PaketService.AutoRestoreOff)
+        Atom.addCommand("atom-workspace", "Paket: Auto Restore On", PaketService.AutoRestoreOn)
+        Atom.addCommand("atom-workspace", "Paket: Auto Restore Off", PaketService.AutoRestoreOff)
         Atom.addCommand("atom-workspace", "Paket: Simplify", PaketService.Simplify)
         Atom.addCommand("atom-workspace", "Paket: Convert From Nuget", PaketService.ConvertFromNuget)
 
