@@ -1,3 +1,6 @@
+### 0.2.3 - 18.05.2015
+* Fix paths on Linux
+
 ### 0.2.2 - 12.05.2015
 * Implement `Auto Resotore` command
 * Implement `Simplify` command
