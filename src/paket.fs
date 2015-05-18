@@ -13,19 +13,19 @@ module PaketService =
 
     let mutable currentNotification : Notification option = None
 
-    let location = Globals.atom.packages.packageDirPaths.[0] + "/paket/bin/paket.exe"
-    let bootstrapperLocation = Globals.atom.packages.packageDirPaths.[0] + "/paket/bin/paket.bootstrapper.exe"
+    let location = Globals.atom.packages.packageDirPaths.[0] + "/Paket/bin/paket.exe"
+    let bootstrapperLocation = Globals.atom.packages.packageDirPaths.[0] + "/Paket/bin/paket.bootstrapper.exe"
 
     let jq (selector : string) = Globals.Dollar.Invoke selector
     let jq'(selector : Element) = Globals.Dollar.Invoke selector
-    
+
     let jq'' (context: Element) (selector : string) = Globals.Dollar.Invoke (selector,context)
-    
+
 
     let notice isError text details =
         match currentNotification with
         | Some n -> let view = Globals.atom.views.getView (n)
-                    let t = ".content .detail .detail-content" |> jq'' view 
+                    let t = ".content .detail .detail-content" |> jq'' view
                     let line = "<div class='line'>" + details + "</div>"
                     t.append(line) |> ignore
                     ()
@@ -33,10 +33,10 @@ module PaketService =
                             Globals.atom.notifications.addError(text, { detail = details; dismissable = true })
                           else
                             Globals.atom.notifications.addInfo(text, { detail = details; dismissable = true })
-                  currentNotification <- Some n       
-   
+                  currentNotification <- Some n
 
-  
+
+
     let handle error input =
         let output = input.ToString()
         Globals.console.log(output)
@@ -75,9 +75,9 @@ module PaketService =
         procs.stderr.on("data", unbox<Function>(handle true )) |> ignore
         ()
 
-    let exec location cmd handler = 
+    let exec location cmd handler =
         let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType600>
-        
+
         let child =
             if Globals._process.platform.StartsWith("win") then
                 Globals.exec(location + " " + cmd, options, handler )
@@ -87,7 +87,7 @@ module PaketService =
 
     let execPaket cmd handler = exec location cmd handler
     let spawnPaket cmd = spawn location cmd
-    
+
     type PackageAddSettings = {
         Versioned : bool
         AddToCurrentProject : bool
@@ -101,26 +101,26 @@ module PaketService =
         let mutable removeListView : (atom.SelectListView * IPanel) option = None
         let mutable updatePackageListView : (atom.SelectListView * IPanel) option = None
         let mutable inCurrentProject = false
-      
+
         type ItemDescription = {
             data : string
         }
 
-        let handlerAddItems (lv : atom.SelectListView) (error : Error) (stdout : Buffer) (stderr : Buffer) = 
+        let handlerAddItems (lv : atom.SelectListView) (error : Error) (stdout : Buffer) (stderr : Buffer) =
             stdout.toString().Split('\n')
             |> Array.map(fun n -> {data = n} :> obj)
             |> lv.setItems
             |> ignore
 
-        let viewForItem desc = 
+        let viewForItem desc =
             if JS.isDefined desc then
                 sprintf "<li>%s</li>" desc.data |> jq
             else
                 "<li></li>" |> jq
-                 
+
         let regiterListView stopChangingCallback cancelledCallback confirmedCallback removeFiler=
             let listView = SelectListViewCtor ()
-            let editorView = 
+            let editorView =
                 listView
                 |> unbox<JQuery>
                 |> fun t' -> t'.[0].firstChild
@@ -130,11 +130,11 @@ module PaketService =
             editorView.getBuffer().stoppedChangingDelay <- 200.
             editorView.getBuffer().onDidStopChanging(stopChangingCallback editorView listView )
 
-            let panel = 
+            let panel =
                 { PanelOptions.item = unbox<JQuery> (listView)
                   PanelOptions.priority = 100
                   PanelOptions.visible = false }
-                |> Globals.atom.workspace.addModalPanel 
+                |> Globals.atom.workspace.addModalPanel
 
             do listView.``getFilterKey <-``(Func<_>(fun _ -> "name" :> obj))
             if removeFiler then listView.``getFilterQuery <-``(Func<_>(fun _ -> ""))
@@ -144,8 +144,8 @@ module PaketService =
 
             listView,panel
 
-        let registerPackagesListView () = 
-            let stopChangingCallback (ev : IEditor) lv = fun () -> 
+        let registerPackagesListView () =
+            let stopChangingCallback (ev : IEditor) lv = fun () ->
                 let txt = ev.getText()
                 if txt.Length > 2 then
                     let cmd = "find-packages searchtext " + txt + " -s"
@@ -153,7 +153,7 @@ module PaketService =
 
             let cancelledCallback = Func<_>(fun _ -> packagesListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
 
-            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) -> 
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) ->
                                         name <- packageDescription.data.Trim()
                                         packagesListView |> Option.iter (fun (model, view) -> view.hide())
                                         if settings.Versioned then
@@ -166,64 +166,64 @@ module PaketService =
 
                                             ) :> obj
                                         else
-                                            let projectStr =  
+                                            let projectStr =
                                                 if not settings.AddToCurrentProject then "" else
                                                 let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
                                                 " project \"" + path + "\""
-                                                
+
                                             "add nuget " + name + projectStr |> spawnPaket :> obj)
 
             regiterListView stopChangingCallback cancelledCallback confirmedCallback true
 
-        let registerVersionListView () = 
+        let registerVersionListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
             let cancelledCallback = Func<_>(fun _ -> versionsListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
-            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) -> 
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) ->
                                         versionsListView |> Option.iter (fun (model, view) -> view.hide())
                                         "add nuget " + name + " version " + packageDescription.data |> spawnPaket :> obj
                 )
             regiterListView stopChangingCallback cancelledCallback confirmedCallback false
 
-        let registerRemoveListView () = 
+        let registerRemoveListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
 
             let cancelledCallback = Func<_>(fun _ -> removeListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
 
-            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) -> 
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) ->
                                         name <- packageDescription.data.Split(' ').[0].Trim()
                                         removeListView |> Option.iter (fun (model, view) -> view.hide())
                                         if inCurrentProject |> not then
                                             "remove nuget " + name |> spawnPaket :> obj
                                         else
-                                            let projectStr =  
+                                            let projectStr =
                                                 if not settings.AddToCurrentProject then "" else
                                                 let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
                                                 " project \"" + path + "\""
-                                                
+
                                             "remove nuget " + name + projectStr |> spawnPaket :> obj)
 
             regiterListView stopChangingCallback cancelledCallback confirmedCallback false
 
-        let registerUpdatePackageListView () = 
+        let registerUpdatePackageListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
 
             let cancelledCallback = Func<_>(fun _ -> updatePackageListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
 
-            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) -> 
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) ->
                                         name <- packageDescription.data.Split(' ').[0].Trim()
                                         updatePackageListView |> Option.iter (fun (model, view) -> view.hide())
                                         if inCurrentProject |> not then
                                             "update nuget " + name |> spawnPaket :> obj
                                         else
-                                            let projectStr =  
+                                            let projectStr =
                                                 if not settings.AddToCurrentProject then "" else
                                                 let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
                                                 " project \"" + path + "\""
-                                                
+
                                             "update nuget " + name + projectStr |> spawnPaket :> obj)
 
             regiterListView stopChangingCallback cancelledCallback confirmedCallback false
-            
+
 
 
     let UpdatePaket () = spawn bootstrapperLocation ""
@@ -244,13 +244,13 @@ module PaketService =
         view.show()
         model.focusFilterEditor() |> ignore)
 
-    let Remove inCurrentProject () = 
+    let Remove inCurrentProject () =
         PackageView.inCurrentProject <- inCurrentProject
         PackageView.removeListView |> Option.iter(fun (model, view) ->
         let cmd = if inCurrentProject |> not then
                         "show-installed-packages -s"
                   else
-                        let projectStr =  
+                        let projectStr =
                             let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
                             " project \"" + path + "\""
                         "show-installed-packages" + projectStr + " -s"
@@ -260,13 +260,13 @@ module PaketService =
 
         )
 
-    let UpdatePackage inCurrentProject () = 
+    let UpdatePackage inCurrentProject () =
         PackageView.inCurrentProject <- inCurrentProject
         PackageView.updatePackageListView |> Option.iter(fun (model, view) ->
         let cmd = if inCurrentProject |> not then
                         "show-installed-packages -s"
                   else
-                        let projectStr =  
+                        let projectStr =
                             let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
                             " project \"" + path + "\""
                         "show-installed-packages" + projectStr + " -s"
