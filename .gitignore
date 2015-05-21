@@ -48,3 +48,4 @@ src/paket/lib/paket.js
 *ncrunch*
 temp/
 src/paket/README.md
+release.cmd
