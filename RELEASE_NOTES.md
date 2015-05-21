@@ -1,3 +1,6 @@
+### 1.0.0 - 21.05.2015
+* First major release. Big thanks to Krzysztof Cieslak for making this possible 
+
 ### 0.2.5 - 21.05.2015
 * Fix paths on Linux
 
