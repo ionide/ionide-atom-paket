@@ -19,13 +19,13 @@ module PaketService =
     let jq (selector : string) = Globals.Dollar.Invoke selector
     let jq'(selector : Element) = Globals.Dollar.Invoke selector
 
-    let jq'' (context: Element) (selector : string) = Globals.Dollar.Invoke (selector,context)
+    let jqC (context: Element) (selector : string) = Globals.Dollar.Invoke (selector,context)
 
 
     let notice isError text details =
         match currentNotification with
         | Some n -> let view = Globals.atom.views.getView (n)
-                    let t = ".content .detail .detail-content" |> jq'' view
+                    let t = ".content .detail .detail-content" |> jqC view
                     let line = "<div class='line'>" + details + "</div>"
                     t.append(line) |> ignore
                     ()
@@ -107,8 +107,11 @@ module PaketService =
         }
 
         let handlerAddItems (lv : atom.SelectListView) (error : Error) (stdout : Buffer) (stderr : Buffer) =
-            stdout.toString().Split('\n')
-            |> Array.map(fun n -> {data = n} :> obj)
+            if(stdout.toString() = "") then
+                [||]
+            else
+                stdout.toString().Split('\n')
+                |> Array.map(fun n -> {data = n} :> obj)
             |> lv.setItems
             |> ignore
 
