@@ -1,3 +1,6 @@
+### 1.0.2 - 15.08.2015
+* Change find-package-versions parameters
+
 ### 1.0.1 - 23.06.2015
 * Fix empty result bug
 
