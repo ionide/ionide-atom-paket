@@ -163,7 +163,7 @@ module PaketService =
                                             versionsListView |> Option.iter ( fun (model, view) ->
                                                 view.show()
                                                 model.focusFilterEditor() |> ignore
-                                                let cmd = "find-package-versions name " + name + " -s"
+                                                let cmd = "find-package-versions nuget " + name + " -s"
                                                 execPaket cmd (Func<_,_,_,_>(handlerAddItems model))
 
 
