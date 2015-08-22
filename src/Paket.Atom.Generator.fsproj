@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{D1081029-2369-4DAA-9F33-2353C5C9ED02}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FSharp.Atom.Generator</RootNamespace>
-    <AssemblyName>FSharp.Atom.Generator</AssemblyName>
+    <RootNamespace>Paket.Atom.Generator</RootNamespace>
+    <AssemblyName>Paket.Atom.Generator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
