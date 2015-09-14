@@ -1,5 +1,5 @@
 [<ReflectedDefinition>]
-module Paket
+module PaketModule
 
 open System
 open FunScript

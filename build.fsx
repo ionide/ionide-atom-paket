@@ -41,7 +41,11 @@ let releaseNotesData =
 
 let release = List.head releaseNotesData
 
+#if MONO
+let apmTool = "apm"
+#else
 let apmTool = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "atom" </> "bin" </> "apm.cmd"
+#endif
 
 // --------------------------------------------------------------------------------------
 // Build the Generator project and run it
@@ -53,7 +57,7 @@ Target "Clean" (fun _ ->
 )
 
 Target "BuildGenerator" (fun () ->
-    [ __SOURCE_DIRECTORY__ @@ "src" @@ "FSharp.Atom.Generator.fsproj" ]
+    [ __SOURCE_DIRECTORY__ @@ "src" @@ "Paket.Atom.Generator.fsproj" ]
     |> MSBuildDebug "" "Rebuild"
     |> Log "AppBuild-Output: "
 )
@@ -62,7 +66,7 @@ Target "RunGenerator" (fun () ->
     
         (TimeSpan.FromMinutes 5.0)
         |> ProcessHelper.ExecProcess (fun p ->
-            p.FileName <- __SOURCE_DIRECTORY__ @@ "src" @@ "bin" @@ "Debug" @@ "FSharp.Atom.Generator.exe" )
+            p.FileName <- __SOURCE_DIRECTORY__ @@ "src" @@ "bin" @@ "Debug" @@ "Paket.Atom.Generator.exe" )
         |> ignore    
 )
 #if MONO
