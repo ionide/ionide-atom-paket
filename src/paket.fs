@@ -95,6 +95,7 @@ module PaketService =
 
     module PackageView =
         let mutable name = "";
+        let mutable group = "";
         let mutable settings = { Versioned =  false; AddToCurrentProject = false }
         let mutable packagesListView : (atom.SelectListView * IPanel) option = None
         let mutable versionsListView : (atom.SelectListView * IPanel) option = None
@@ -158,6 +159,8 @@ module PaketService =
 
             let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) ->
                                         name <- packageDescription.data.Trim()
+                                        group <- ""
+
                                         packagesListView |> Option.iter (fun (model, view) -> view.hide())
                                         if settings.Versioned then
                                             versionsListView |> Option.iter ( fun (model, view) ->
@@ -193,7 +196,8 @@ module PaketService =
             let cancelledCallback = Func<_>(fun _ -> removeListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
 
             let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) ->
-                                        name <- packageDescription.data.Split(' ').[0].Trim()
+                                        group <- packageDescription.data.Split(' ').[0].Trim()
+                                        name <- packageDescription.data.Split(' ').[1].Trim()
                                         removeListView |> Option.iter (fun (model, view) -> view.hide())
                                         if inCurrentProject |> not then
                                             "remove nuget " + name |> spawnPaket :> obj
@@ -213,7 +217,8 @@ module PaketService =
             let cancelledCallback = Func<_>(fun _ -> updatePackageListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
 
             let confirmedCallback = unbox<Func<_, _>> (fun (packageDescription : ItemDescription) ->
-                                        name <- packageDescription.data.Split(' ').[0].Trim()
+                                        group <- packageDescription.data.Split(' ').[0].Trim()
+                                        name <- packageDescription.data.Split(' ').[1].Trim()
                                         updatePackageListView |> Option.iter (fun (model, view) -> view.hide())
                                         if inCurrentProject |> not then
                                             "update nuget " + name |> spawnPaket :> obj
