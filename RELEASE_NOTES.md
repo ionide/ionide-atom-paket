@@ -1,3 +1,6 @@
+### 2.0.0 - 14.09.2015
+* Compatible with Paket 2.0
+
 ### 1.0.2 - 15.08.2015
 * Change find-package-versions parameters
 
