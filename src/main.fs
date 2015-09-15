@@ -11,7 +11,7 @@ let root = __SOURCE_DIRECTORY__
 // Translate the type given as #1 using module name #2
 // and save the result to a file specified in #3
 let atomModules =
-  [ typeof<Ionide.Paket.Paket>, "AtomFSharpPaket", "paket/lib/paket.js" ]
+  [ typeof<Ionide.Paket.Paket>, "AtomFSharpPaket" ]
 
 // --------------------------------------------------------------------------------------
 // Compile F# type to an atom module
@@ -24,8 +24,8 @@ open System.Reflection
 open Microsoft.FSharp.Quotations
 open FunScript.Compiler
 
-let translateModules() =
-  for typ, moduleName, fileName in atomModules do
+let translateModules fileName =
+  for typ, moduleName in atomModules do
 
     // We generate F# quotation that returns all the methods that we want to expose
     // from the class. This way, we can then wrap it into simple JS code that
@@ -90,4 +90,4 @@ let translateModules() =
 // Entry point - do stuff!
 // --------------------------------------------------------------------------------------
 
-do translateModules()
+do translateModules "../release/lib/paket.js"

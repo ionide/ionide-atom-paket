@@ -13,8 +13,8 @@ module PaketService =
 
     let mutable currentNotification : Notification option = None
 
-    let location = Globals.atom.packages.packageDirPaths.[0] + "/Paket/bin/paket.exe"
-    let bootstrapperLocation = Globals.atom.packages.packageDirPaths.[0] + "/Paket/bin/paket.bootstrapper.exe"
+    let location = Globals.atom.packages.packageDirPaths.[0] + "/ionide-paket/bin/paket.exe"
+    let bootstrapperLocation = Globals.atom.packages.packageDirPaths.[0] + "/ionide-paket/bin/paket.bootstrapper.exe"
 
     let jq (selector : string) = Globals.Dollar.Invoke selector
     let jq'(selector : Element) = Globals.Dollar.Invoke selector

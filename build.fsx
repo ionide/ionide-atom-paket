@@ -48,8 +48,7 @@ let apmTool = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicati
 // --------------------------------------------------------------------------------------
 
 Target "Clean" (fun _ ->
-    DeleteFile "src/paket/bin/paket.exe"
-    CopyFile "src/paket" "README.md"
+    CleanDir "temp/release"
 )
 
 Target "BuildGenerator" (fun () ->
@@ -68,14 +67,14 @@ Target "RunGenerator" (fun () ->
 #if MONO
 #else
 Target "RunScript" (fun () ->
-    Ionide.Paket.Generator.translateModules()
+    Ionide.Paket.Generator.translateModules "../release/lib/paket.js"
 )
 #endif
 
 Target "InstallDependencies" (fun _ ->
     let args = "install"
 
-    let srcDir = "src/paket"
+    let srcDir = "release"
     let result =
         ExecProcess (fun info ->
             info.FileName <- apmTool
@@ -107,7 +106,8 @@ Target "PushToMaster" (fun _ ->
         CopyRecursive tempGitDir (tempReleaseDir  </> ".git") true |> ignore
 
     cleanEverythingFromLastCheckout()
-    CopyRecursive "src/paket" tempReleaseDir true |> tracefn "%A"
+    CopyRecursive "release" tempReleaseDir true |> tracefn "%A"
+    CopyFiles tempReleaseDir ["README.md"; "RELEASE_NOTES.md"; "LICENSE" ]
 
     StageAll tempReleaseDir
     Git.Commit.Commit tempReleaseDir (sprintf "Release %s" release.NugetVersion)
@@ -122,6 +122,7 @@ Target "Release" (fun _ ->
             info.WorkingDirectory <- tempReleaseDir
             info.Arguments <- args) System.TimeSpan.MaxValue
     if result <> 0 then failwithf "Error during running apm with %s" args
+    DeleteDir "temp/release"
 )
 
 // --------------------------------------------------------------------------------------

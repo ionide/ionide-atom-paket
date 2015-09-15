@@ -49,3 +49,4 @@ src/paket/lib/paket.js
 temp/
 src/paket/README.md
 release.cmd
+*.js
