@@ -1,5 +1,6 @@
 # Ionide-Paket
 
+It's part of [Ionide](ionide.io) plugin suite.
 [Paket](https://github.com/fsprojects/Paket) is package dependency manager for .NET with support for NuGet packages and GitHub repositories.
 
 ## Features
@@ -7,7 +8,12 @@
 - Syntax highlighting for `paket.dependencies`
 - Paket commands available in Atom's Command Palette
 
-![Paket add](https://raw.githubusercontent.com/fsprojects/Paket.Atom/master/img/paket-add-atom.gif)
+## Build
+
+* Clone this repository
+* Run `build.cmd` (for Windows) or `build.sh` (for Linux / Max) to build projects
+* Go to `release` folder and run `apm link` to create symbolic link between plugin and Atom's plugins folder
+* Run Atom
 
 ## Contributing and copyright
 

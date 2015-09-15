@@ -50,3 +50,4 @@ temp/
 src/paket/README.md
 release.cmd
 *.js
+paket.exe
