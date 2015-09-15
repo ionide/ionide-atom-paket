@@ -1,4 +1,4 @@
-# Paket.Atom
+# Ionide-Paket
 
 [Paket](https://github.com/fsprojects/Paket) is package dependency manager for .NET with support for NuGet packages and GitHub repositories.
 
@@ -11,15 +11,14 @@
 
 ## Contributing and copyright
 
-The project is hosted on [GitHub](https://github.com/fsprojects/Paket.Atom) where you can [report issues](https://github.com/fsprojects/Paket.Atom/issues), fork 
-the project and submit pull requests on the [develop branch](https://github.com/fsprojects/Paket.Atom/tree/develop).
+The project is hosted on [GitHub](https://github.com/ionide/ionide-paket) where you can [report issues](https://github.com/ionide/ionide-paket/issues), fork
+the project and submit pull requests.
 
-The library is available under [Apache 2 license](https://github.com/fsprojects/Paket.Atom/blob/master/LICENSE.md), which allows modification and 
+The library is available under [MIT license](https://github.com/ionide/ionide-paket/blob/master/LICENSE.md), which allows modification and
 redistribution for both commercial and non-commercial purposes.
 
-### Maintainer(s)
+## Code of Conduct
 
-- [@Krzysztof-Cieslak](https://github.com/Krzysztof-Cieslak)
-- [@forki](https://github.com/forki)
+This project adheres to No Code of Conduct. We are all adults. We accept everyone's contributions. Nothing else matters.
 
-The default maintainer account for projects under "fsprojects" is [@fsgit](https://github.com/fsgit) - F# Community Project Incubation Space (repo management)
+For more information please visit the [No Code of Conduct](https://github.com/domgetter/NCoC) homepage.

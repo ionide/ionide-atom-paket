@@ -1,5 +1,5 @@
 [<ReflectedDefinition>]
-module Paket
+module Ionide.Paket
 
 open System
 open FunScript

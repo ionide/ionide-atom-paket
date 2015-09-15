@@ -1,4 +1,4 @@
-﻿module Paket.Atom.Generator
+﻿module Ionide.Paket.Generator
 
 // --------------------------------------------------------------------------------------
 // Load the F# implementation and specify parameters for the translator
@@ -11,7 +11,7 @@ let root = __SOURCE_DIRECTORY__
 // Translate the type given as #1 using module name #2
 // and save the result to a file specified in #3
 let atomModules =
-  [ typeof<Paket.Paket>, "AtomFSharpPaket", "paket/lib/paket.js" ]
+  [ typeof<Ionide.Paket.Paket>, "AtomFSharpPaket", "paket/lib/paket.js" ]
 
 // --------------------------------------------------------------------------------------
 // Compile F# type to an atom module
