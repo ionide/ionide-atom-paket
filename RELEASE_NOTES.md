@@ -1,3 +1,6 @@
+### 2.0.7 - 20.09.2015
+* Normalize .exe paths
+
 ### 2.0.6 - 20.09.2015
 * Fix naming bug
 
