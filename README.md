@@ -1,6 +1,6 @@
 # Ionide-Paket
 
-It's part of [Ionide](ionide.io) plugin suite.
+It's part of [Ionide](http://ionide.io) plugin suite.
 [Paket](https://github.com/fsprojects/Paket) is package dependency manager for .NET with support for NuGet packages and GitHub repositories.
 
 ## Features
