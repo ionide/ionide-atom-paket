@@ -1,3 +1,6 @@
+### 2.0.4 - 20.09.2015
+* Fix naming bug
+
 ### 2.0.3 - 18.09.2015
 * Compatible with Paket 2.0
 
