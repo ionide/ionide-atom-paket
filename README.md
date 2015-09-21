@@ -11,6 +11,7 @@ It's part of [Ionide](http://ionide.io) plugin suite.
 ## Build
 
 * Clone this repository
+* Checkout `develop` branch
 * Run `build.cmd` (for Windows) or `build.sh` (for Linux / Max) to build projects
 * Go to `release` folder and run `apm link` to create symbolic link between plugin and Atom's plugins folder
 * Run Atom
