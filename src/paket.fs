@@ -13,8 +13,18 @@ module PaketService =
 
     let mutable currentNotification : Notification option = None
 
-    let location = Globals.atom.packages.packageDirPaths.[0] + "\\ionide-paket\\bin\\paket.exe"
-    let bootstrapperLocation = Globals.atom.packages.packageDirPaths.[0] + "\\ionide-paket\\bin\\paket.bootstrapper.exe"
+    let location =
+        if Globals._process.platform.StartsWith("win") then
+            Globals.atom.packages.packageDirPaths.[0] + "\\ionide-paket\\bin\\paket.exe"
+        else
+            Globals.atom.packages.packageDirPaths.[0] + "/ionide-paket/bin/paket.exe"
+
+
+    let bootstrapperLocation =
+        if Globals._process.platform.StartsWith("win") then
+            Globals.atom.packages.packageDirPaths.[0] + "\\ionide-paket\\bin\\paket.bootstrapper.exe"
+        else
+            Globals.atom.packages.packageDirPaths.[0] + "/ionide-paket/bin/paket.bootstrapper.exe"
 
     let jq (selector : string) = Globals.Dollar.Invoke selector
     let jq'(selector : Element) = Globals.Dollar.Invoke selector
@@ -46,6 +56,10 @@ module PaketService =
             notice false "" output
         ()
 
+    let handleSilent input =
+        let output = input.ToString()
+        Globals.console.log(output)
+
     let handleExit (code:string) =
         currentNotification |> Option.iter (fun n ->
             let view = Globals.atom.views.getView (n) |> jq'
@@ -74,6 +88,21 @@ module PaketService =
         procs.stdout.on("data", unbox<Function>(handle false )) |> ignore
         procs.stderr.on("data", unbox<Function>(handle true )) |> ignore
         ()
+
+    let spawnSilent location (cmd : string) =
+        let cmd' = cmd.Split(' ');
+        let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType599>
+        let procs = if Globals._process.platform.StartsWith("win") then
+                        Globals.spawn(location, cmd', options)
+                    else
+                        let prms = Array.concat [ [|location|]; cmd']
+                        Globals.spawn("mono", prms, options)
+        procs.on("exit",unbox<Function>(handleSilent)) |> ignore
+        procs.stdout.on("data", unbox<Function>(handleSilent )) |> ignore
+        procs.stderr.on("data", unbox<Function>(handleSilent )) |> ignore
+        ()
+
+
 
     let exec location cmd handler =
         let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType600>
@@ -235,7 +264,7 @@ module PaketService =
 
 
     let UpdatePaket () = spawn bootstrapperLocation ""
-    let UpdatePaketSilent () = spawn bootstrapperLocation "-s"
+    let UpdatePaketSilent () = spawnSilent bootstrapperLocation ""
     let Init () = "init" |> spawnPaket
     let Install () = "install" |> spawnPaket
     let Update () = "update" |> spawnPaket
