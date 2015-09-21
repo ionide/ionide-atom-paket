@@ -1,3 +1,6 @@
+### 2.0.8 - 21.09.2015
+* Update paket spawn
+
 ### 2.0.7 - 20.09.2015
 * Normalize .exe paths
 
