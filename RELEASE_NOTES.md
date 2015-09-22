@@ -1,3 +1,12 @@
+### 2.0.8 - 21.09.2015
+* Update paket spawn
+
+### 2.0.7 - 20.09.2015
+* Normalize .exe paths
+
+### 2.0.6 - 20.09.2015
+* Fix naming bug
+
 ### 2.0.3 - 18.09.2015
 * Compatible with Paket 2.0
 

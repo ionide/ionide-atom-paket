@@ -51,3 +51,6 @@ src/paket/README.md
 release.cmd
 *.js
 paket.exe
+.fake/
+paket.js
+release/lib/paket.js
