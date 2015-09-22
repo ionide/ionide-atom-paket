@@ -41,7 +41,37 @@ let releaseNotesData =
 
 let release = List.head releaseNotesData
 
-let apmTool = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "atom" </> "bin" </> "apm.cmd"
+let run cmd args dir =
+    if execProcess( fun info ->
+        info.FileName <- cmd
+        if not( String.IsNullOrWhiteSpace dir) then
+            info.WorkingDirectory <- dir
+        info.Arguments <- args
+    ) System.TimeSpan.MaxValue = false then
+        traceError <| sprintf "Error while running '%s' with args: %s" cmd args
+
+let apmTool =
+    #if MONO
+        "apm"
+    #else
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "atom" </> "bin" </> "apm.cmd"
+    #endif
+
+let atomTool =
+    #if MONO
+        "atom"
+    #else
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "atom" </> "bin" </> "atom.cmd"
+    #endif
+
+
+Target "TryPackage"( fun _ ->
+    killProcess "atom"
+    run apmTool "uninstall ionide-paket" ""
+    run apmTool "link" "release"
+    run atomTool __SOURCE_DIRECTORY__ ""
+)
+
 
 // --------------------------------------------------------------------------------------
 // Build the Generator project and run it
@@ -82,6 +112,8 @@ Target "InstallDependencies" (fun _ ->
             info.Arguments <- args) System.TimeSpan.MaxValue
     if result <> 0 then failwithf "Error during running apm with %s" args
 )
+
+
 
 Target "TagDevelopBranch" (fun _ ->
     StageAll ""
@@ -147,5 +179,9 @@ Target "Default" DoNothing
   ==> "TagDevelopBranch"
   ==> "PushToMaster"
   ==> "Release"
+
+"InstallDependencies"
+    ==> "TryPackage"
+
 
 RunTargetOrDefault "Default"
