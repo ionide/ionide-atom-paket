@@ -17,14 +17,14 @@ module PaketService =
         if Globals._process.platform.StartsWith("win") then
             Globals.atom.packages.packageDirPaths.[0] + @"\ionide-paket\bin\paket.exe"
         else
-            Globals.atom.packages.packageDirPaths.[0] + @"\ionide-paket\bin\paket.exe"
+            Globals.atom.packages.packageDirPaths.[0] + @"/ionide-paket/bin/paket.exe"
 
 
     let bootstrapperLocation =
         if Globals._process.platform.StartsWith("win") then
             Globals.atom.packages.packageDirPaths.[0] + @"\ionide-paket\bin\paket.bootstrapper.exe"
         else
-            Globals.atom.packages.packageDirPaths.[0] + @"\ionide-paket\bin\paket.bootstrapper.exe"
+            Globals.atom.packages.packageDirPaths.[0] + @"/ionide-paket/bin/paket.bootstrapper.exe"
 
     let jq (selector : string) = Globals.Dollar.Invoke selector
     let jq'(selector : Element) = Globals.Dollar.Invoke selector

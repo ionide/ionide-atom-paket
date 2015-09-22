@@ -722,7 +722,7 @@ PaketService__get_bootstrapperLocation$ = (function()
     }
     else
     {
-      return ((((window.atom).packages).packageDirPaths)[0] + "\\ionide-paket\\bin\\paket.bootstrapper.exe");
+      return ((((window.atom).packages).packageDirPaths)[0] + "/ionide-paket/bin/paket.bootstrapper.exe");
     };
 });
 PaketService__get_currentNotification$ = (function()
@@ -737,7 +737,7 @@ PaketService__get_location$ = (function()
     }
     else
     {
-      return ((((window.atom).packages).packageDirPaths)[0] + "\\ionide-paket\\bin\\paket.exe");
+      return ((((window.atom).packages).packageDirPaths)[0] + "/ionide-paket/bin/paket.exe");
     };
 });
 PaketService__handle$Object_Object_ = (function(error,input)
