@@ -6,7 +6,7 @@
 #I "../lib"
 #I "../packages/FunScript/lib/net40"
 
-#r "FunScript.dll" 
+#r "FunScript.dll"
 #r "FunScript.Interop.dll"
 #r "FunScript.TypeScript.Binding.emissary.dll"
 #r "FunScript.TypeScript.Binding.atom.dll"
@@ -17,4 +17,4 @@
 #r "FunScript.TypeScript.Binding.pathwatcher.dll"
 #r "FunScript.TypeScript.Binding.q.dll"
 #r "FunScript.TypeScript.Binding.space_pen.dll"
-#endif
+#endif 

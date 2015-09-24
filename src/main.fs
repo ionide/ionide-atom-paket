@@ -80,9 +80,11 @@ let translateModules fileName =
           let parNames = String.concat "" [ for j in 1 .. m.GetParameters().Length -> sprintf "p%i" j ]
           let parArgs = String.concat "" [ for j in 1 .. m.GetParameters().Length -> sprintf "(p%i)" j ]
           yield m.Name + ": function(" + parNames + ") {"
-          yield "  return _funcs[" + string i + "](_self)" + parArgs + "; }" +
-                 ( if i = meths.Length then "" else "," )
-        yield "};" ]
+          yield "  return _funcs[" + string i + "](_self)" + parArgs + "; }" + ","
+
+        yield "config:  {
+            MonoPath: {type: 'string', 'default': '/usr/bin'} }}"
+            ]
       |> String.concat "\n"
     System.IO.File.WriteAllText(System.IO.Path.Combine(root, fileName), moduleJS)
 
