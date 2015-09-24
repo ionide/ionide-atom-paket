@@ -376,7 +376,7 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _800;
+      var _807;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -385,7 +385,7 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__removeListView);
-      })(_800);
+      })(_807);
     });
     var confirmedCallback = (function(packageDescription)
     {
@@ -403,17 +403,17 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
       }
       else
       {
-        var _841;
+        var _848;
         if ((!PackageView__settings.AddToCurrentProject)) 
         {
-          _841 = "";
+          _848 = "";
         }
         else
         {
           var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
-          _841 = ((" project \"" + path) + "\"");
+          _848 = ((" project \"" + path) + "\"");
         };
-        var projectStr = _841;
+        var projectStr = _848;
         return PaketService__spawnPaket$((("remove nuget " + PackageView__name) + projectStr));
       };
     });
@@ -433,7 +433,7 @@ PackageView__registerUpdatePackageListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _881;
+      var _888;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -442,7 +442,7 @@ PackageView__registerUpdatePackageListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__updatePackageListView);
-      })(_881);
+      })(_888);
     });
     var confirmedCallback = (function(packageDescription)
     {
@@ -460,17 +460,17 @@ PackageView__registerUpdatePackageListView$ = (function(unitVar0)
       }
       else
       {
-        var _922;
+        var _929;
         if ((!PackageView__settings.AddToCurrentProject)) 
         {
-          _922 = "";
+          _929 = "";
         }
         else
         {
           var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
-          _922 = ((" project \"" + path) + "\"");
+          _929 = ((" project \"" + path) + "\"");
         };
-        var projectStr = _922;
+        var projectStr = _929;
         return PaketService__spawnPaket$((("update nuget " + PackageView__name) + projectStr));
       };
     });
@@ -490,7 +490,7 @@ PackageView__registerVersionListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _759;
+      var _766;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -499,7 +499,7 @@ PackageView__registerVersionListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__versionsListView);
-      })(_759);
+      })(_766);
     });
     var confirmedCallback = (function(packageDescription)
     {
@@ -525,21 +525,21 @@ PackageView__regiterListView$ = (function(stopChangingCallback,cancelledCallback
     var panel = ((window.atom).workspace).addModalPanel((new PanelOptions___ctor$(item, false, priority)));
     (listView.getFilterKey = (function()
     {
-      var _712;
+      var _719;
       return (function(_arg1)
       {
         return "name";
-      })(_712);
+      })(_719);
     }));
     if (removeFiler) 
     {
       (listView.getFilterQuery = (function()
       {
-        var _717;
+        var _724;
         return (function(_arg2)
         {
           return "";
-        })(_717);
+        })(_724);
       }));
     }
     else
@@ -611,18 +611,18 @@ PaketService__Remove$ = (function(inCurrentProject,unitVar1)
     {
       var model = tupledArg.Items[0.000000];
       var view = tupledArg.Items[1.000000];
-      var _1103;
+      var _1110;
       if ((!inCurrentProject)) 
       {
-        _1103 = "show-installed-packages -s";
+        _1110 = "show-installed-packages -s";
       }
       else
       {
         var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
         var projectStr = ((" project \"" + path) + "\"");
-        _1103 = (("show-installed-packages" + projectStr) + " -s");
+        _1110 = (("show-installed-packages" + projectStr) + " -s");
       };
-      var cmd = _1103;
+      var cmd = _1110;
       PaketService__execPaket$(cmd, (function(delegateArg,_delegateArg,__delegateArg)
       {
         return (function(error)
@@ -659,18 +659,18 @@ PaketService__UpdatePackage$ = (function(inCurrentProject,unitVar1)
     {
       var model = tupledArg.Items[0.000000];
       var view = tupledArg.Items[1.000000];
-      var _1157;
+      var _1164;
       if ((!inCurrentProject)) 
       {
-        _1157 = "show-installed-packages -s";
+        _1164 = "show-installed-packages -s";
       }
       else
       {
         var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
         var projectStr = ((" project \"" + path) + "\"");
-        _1157 = (("show-installed-packages" + projectStr) + " -s");
+        _1164 = (("show-installed-packages" + projectStr) + " -s");
       };
-      var cmd = _1157;
+      var cmd = _1164;
       PaketService__execPaket$(cmd, (function(delegateArg,_delegateArg,__delegateArg)
       {
         return (function(error)
@@ -793,16 +793,16 @@ PaketService__notice$ = (function(isError,text,details)
 {
     if ((PaketService__currentNotification.Tag == 0.000000)) 
     {
-      var _627;
+      var _634;
       if (isError) 
       {
-        _627 = ((window.atom).notifications).addError(text, (new NotificationsOptions___ctor$(details, true)));
+        _634 = ((window.atom).notifications).addError(text, (new NotificationsOptions___ctor$(details, true)));
       }
       else
       {
-        _627 = ((window.atom).notifications).addInfo(text, (new NotificationsOptions___ctor$(details, true)));
+        _634 = ((window.atom).notifications).addInfo(text, (new NotificationsOptions___ctor$(details, true)));
       };
-      var n = _627;
+      var n = _634;
       PaketService__currentNotification = {Tag: 1.000000, Value: n};
     }
     else
@@ -826,7 +826,8 @@ PaketService__spawn$ = (function(location,cmd)
     else
     {
       var prms = Array__Concat$String_1String(Seq__OfList$String___String___(List__CreateCons$String___String___([location], List__CreateCons$String___String___(cmd_, List__Empty$String___String___()))));
-      _442 = (child_process.spawn("mono", prms, options));
+      var path = (((window.atom).config).get("ionide-paket.MonoPath"));
+      _442 = (child_process.spawn((path + "/mono"), prms, options));
     };
     var procs = _442;
     PaketService__currentNotification = {Tag: 0.000000};
@@ -853,17 +854,17 @@ PaketService__spawnSilent$ = (function(location,cmd)
 {
     var cmd_ = String__SplitWithoutOptions$(cmd, [" "]);
     var options = (new Options___ctor$((((window.atom).project).getPaths())[0]));
-    var _979;
+    var _986;
     if (String__StartsWith$(((window.process).platform), "win")) 
     {
-      _979 = (child_process.spawn(location, cmd_, options));
+      _986 = (child_process.spawn(location, cmd_, options));
     }
     else
     {
       var prms = Array__Concat$String_1String(Seq__OfList$String___String___(List__CreateCons$String___String___([location], List__CreateCons$String___String___(cmd_, List__Empty$String___String___()))));
-      _979 = (child_process.spawn("mono", prms, options));
+      _986 = (child_process.spawn("mono", prms, options));
     };
-    var procs = _979;
+    var procs = _986;
     var ignored0 = (procs.on("exit", (function(input)
     {
       return PaketService__handleSilent$Object_Object_(input);
@@ -1310,5 +1311,6 @@ module.exports = AtomFSharpPaket = {
 deactivate: function() {
   return _funcs[1](_self); },
 activate: function(p1) {
-  return _funcs[2](_self)(p1); }
-};
+  return _funcs[2](_self)(p1); },
+config:  {
+            MonoPath: {type: 'string', 'default': '/usr/bin'} }}
