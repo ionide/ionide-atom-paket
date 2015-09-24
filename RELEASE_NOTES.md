@@ -1,3 +1,6 @@
+### 2.1.0 - 24.09.2015
+* Add mono path to settings
+
 ### 2.0.9 - 21.09.2015
 * Update paket spawn
 
