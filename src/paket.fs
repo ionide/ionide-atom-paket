@@ -80,7 +80,7 @@ module PaketService =
         let procs = if Globals._process.platform.StartsWith("win") then
                         Globals.spawn(location, cmd', options)
                     else
-                        let prms = Array.concat [ [|location|]; cmd'] 
+                        let prms = Array.concat [ [|location|]; cmd']
                         let path = Globals.atom.config.get("ionide-paket.MonoPath") |> unbox<string>
                         Globals.spawn(path + "/mono", prms, options)
 
@@ -97,7 +97,8 @@ module PaketService =
                         Globals.spawn(location, cmd', options)
                     else
                         let prms = Array.concat [ [|location|]; cmd']
-                        Globals.spawn("mono", prms, options)
+                        let path = Globals.atom.config.get("ionide-paket.MonoPath") |> unbox<string>
+                        Globals.spawn(path + "/mono", prms, options)
         procs.on("exit",unbox<Function>(handleSilent)) |> ignore
         procs.stdout.on("data", unbox<Function>(handleSilent )) |> ignore
         procs.stderr.on("data", unbox<Function>(handleSilent )) |> ignore
