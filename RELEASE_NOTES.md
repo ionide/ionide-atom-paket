@@ -1,3 +1,6 @@
+### 2.1.1 - 07.10.2015
+* Fix paket.bootstraper spawn
+
 ### 2.1.0 - 24.09.2015
 * Add mono path to settings
 
