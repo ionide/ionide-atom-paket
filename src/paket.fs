@@ -206,8 +206,13 @@ module PaketService =
                                         else
                                             let projectStr =
                                                 if not settings.AddToCurrentProject then "" else
-                                                let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
-                                                " project \"" + path + "\""
+                                                try
+                                                    let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
+                                                    " project \"" + path + "\""
+                                                with
+                                                | _ ->
+                                                    notice true "Paket error" ".*proj file needs to be open"
+                                                    ""
 
                                             "add nuget " + name + projectStr |> spawnPaket :> obj)
 
@@ -236,8 +241,13 @@ module PaketService =
                                         else
                                             let projectStr =
                                                 if not settings.AddToCurrentProject then "" else
-                                                let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
-                                                " project \"" + path + "\""
+                                                try
+                                                    let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
+                                                    " project \"" + path + "\""
+                                                with
+                                                | _ ->
+                                                    notice true "Paket error" ".*proj file needs to be open"
+                                                    ""
 
                                             "remove nuget " + name + projectStr |> spawnPaket :> obj)
 
@@ -257,8 +267,13 @@ module PaketService =
                                         else
                                             let projectStr =
                                                 if not settings.AddToCurrentProject then "" else
-                                                let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
-                                                " project \"" + path + "\""
+                                                try
+                                                    let path = Globals.atom.workspace.getActiveTextEditor().buffer.file.path
+                                                    " project \"" + path + "\""
+                                                with
+                                                | _ ->
+                                                    notice true "Paket error" ".*proj file needs to be open"
+                                                    ""
 
                                             "update nuget " + name + projectStr |> spawnPaket :> obj)
 
