@@ -57,8 +57,9 @@ module PaketService =
         ()
 
     let handleSilent input =
-        let output = input.ToString()
-        Globals.console.log(output)
+        if input <> null then
+            let output = input.ToString()
+            Globals.console.log(output)
 
     let handleExit (code:string) =
         currentNotification |> Option.iter (fun n ->
