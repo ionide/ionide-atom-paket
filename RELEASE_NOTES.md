@@ -1,3 +1,6 @@
+### 2.1.2 - 13.10.2015
+* Small bug fixes
+
 ### 2.1.1 - 07.10.2015
 * Fix paket.bootstraper spawn
 
