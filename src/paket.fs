@@ -331,6 +331,16 @@ module PaketService =
 
         )
 
+    let UpdateGroup () =
+        PackageView.inCurrentProject <- false
+        PackageView.updatePackageListView |> Option.iter(fun (model, view) ->
+        let cmd = "show-groups -s"
+        execPaket cmd (Func<_,_,_,_>(PackageView.handlerAddItems model))
+        view.show()
+        model.focusFilterEditor() |> ignore
+
+        )
+
 
 type Paket() =
 
@@ -352,6 +362,7 @@ type Paket() =
         Atom.addCommand("atom-workspace", "Paket: Add NuGet Package Version", PaketService.Add { Versioned =  true; AddToCurrentProject = false })
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package", PaketService.Remove false)
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package (from current project)", PaketService.Remove true )
+        Atom.addCommand("atom-workspace", "Paket: Update Group", PaketService.UpdateGroup)
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package", PaketService.UpdatePackage false)
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package (from current project)", PaketService.UpdatePackage true )
         Atom.addCommand("atom-workspace", "Paket: Auto Restore On", PaketService.AutoRestoreOn)
