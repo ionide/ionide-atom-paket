@@ -4,7 +4,7 @@ window.$ = require('jquery');
 var atomSpaceView = require('atom-space-pen-views');
 
 function wrappedFunScript() { 
-var list_1_String____NilString___, list_1_String____ConsString___, UnfoldEnumerator_2_Int32__String_____ctor$Int32_String___, UnfoldEnumerator_2_FSharpList_1_String____String_____ctor$FSharpList_1_String____String___, TupleString____Int32, TupleString____FSharpList_1_String___, TupleSelectListView__IPanel_, String__StartsWith$, String__SplitWithoutOptions$, String__PrintFormatToString$, Seq__Unfold$Int32__String___Int32_String___, Seq__Unfold$FSharpList_1_String____String___FSharpList_1_String____String___, Seq__ToArray$String___String___, Seq__OfList$String___String___, Seq__OfArray$String___String___, Seq__IterateIndexed$String___String___, Seq__FromFactory$String___String___, Seq__FoldIndexedAux$Unit__String___Unit__String___, Seq__FoldIndexed$String____Unit_String____Unit_, Seq__Enumerator$String___String___, PanelOptions___ctor$, Paket__deactivate$, Paket__activate$, Paket___ctor$, PaketService__spawnSilent$, PaketService__spawnPaket$, PaketService__spawn$, PaketService__notice$, PaketService__location, PaketService__jq_$, PaketService__jqC$, PaketService__jq$, PaketService__handleSilent$Object_Object_, PaketService__handleExit$, PaketService__handle$Object_Object_, PaketService__get_location$, PaketService__get_currentNotification$, PaketService__get_bootstrapperLocation$, PaketService__execPaket$, PaketService__exec$, PaketService__currentNotification, PaketService__bootstrapperLocation, PaketService__UpdatePaketSilent$, PaketService__UpdatePaket$, PaketService__UpdatePackage$, PaketService__UpdateGroup$, PaketService__Update$, PaketService__Simplify$, PaketService__Restore$, PaketService__Remove$, PaketService__Outdated$, PaketService__Install$, PaketService__Init$, PaketService__ConvertFromNuget$, PaketService__AutoRestoreOn$, PaketService__AutoRestoreOff$, PaketService__Add$, PackageView__viewForItem$, PackageView__versionsListView, PackageView__updatePackageListView, PackageView__updateGroupListView, PackageView__settings, PackageView__removeListView, PackageView__regiterListView$, PackageView__registerVersionListView$, PackageView__registerUpdatePackageListView$, PackageView__registerUpdateGroupListView$, PackageView__registerRemoveListView$, PackageView__registerPackagesListView$, PackageView__packagesListView, PackageView__name, PackageView__inCurrentProject, PackageView__handlerAddItems$, PackageView__group, PackageView__get_versionsListView$, PackageView__get_updatePackageListView$, PackageView__get_updateGroupListView$, PackageView__get_settings$, PackageView__get_removeListView$, PackageView__get_packagesListView$, PackageView__get_name$, PackageView__get_inCurrentProject$, PackageView__get_group$, PackageAddSettings___ctor$, Options___ctor$, Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__Iterate$Notification_Notification_, Option__IsSome$Int32_Int32, Option__IsSome$FSharpList_1_String___FSharpList_1_String___, Option__GetValue$Tuple_2_String____Int32_Tuple_2_String____Int32_, Option__GetValue$Tuple_2_String____FSharpList_1_String___Tuple_2_String____FSharpList_1_String___, Option__GetValue$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__GetValue$Notification_Notification_, Option__GetValue$Int32_Int32, Option__GetValue$FSharpList_1_String___FSharpList_1_String___, NotificationsOptions___ctor$, List__Tail$String___String___, List__Head$String___String___, List__Empty$String___String___, List__CreateCons$String___String___, ItemDescription___ctor$, CreateEnumerable_1_String_____ctor$String___, Atom__addCommand$Unit_Unit_, Array__ZeroCreate$String___String___, Array__ZeroCreate$Object_Object_, Array__MapIndexed$String_1_String___String_String___, Array__MapIndexed$String_1_Object_String_Object_, Array__Map$String_1_String___String_String___, Array__Map$String_1_Object_String_Object_, Array__Length$String_1String, Array__FoldIndexed$String____String_1String____String, Array__Fold$String_1_String___String_String___, Array__ConcatImpl$String_1String, Array__Concat$String_1String, Array__BoxedLength$;
+var list_1_String____NilString___, list_1_String____ConsString___, UnfoldEnumerator_2_Int32__String_____ctor$Int32_String___, UnfoldEnumerator_2_FSharpList_1_String____String_____ctor$FSharpList_1_String____String___, TupleString____Int32, TupleString____FSharpList_1_String___, TupleSelectListView__IPanel_, String__StartsWith$, String__SplitWithoutOptions$, String__PrintFormatToString$, Seq__Unfold$Int32__String___Int32_String___, Seq__Unfold$FSharpList_1_String____String___FSharpList_1_String____String___, Seq__ToArray$String___String___, Seq__OfList$String___String___, Seq__OfArray$String___String___, Seq__IterateIndexed$String___String___, Seq__FromFactory$String___String___, Seq__FoldIndexedAux$Unit__String___Unit__String___, Seq__FoldIndexed$String____Unit_String____Unit_, Seq__Enumerator$String___String___, PanelOptions___ctor$, Paket__deactivate$, Paket__activate$, Paket___ctor$, PaketService__spawnSilent$, PaketService__spawnPaket$, PaketService__spawn$, PaketService__notice$, PaketService__location, PaketService__jq_$, PaketService__jqC$, PaketService__jq$, PaketService__handleSilent$Object_Object_, PaketService__handleExit$, PaketService__handle$Object_Object_, PaketService__get_location$, PaketService__get_currentNotification$, PaketService__get_bootstrapperLocation$, PaketService__execPaket$, PaketService__exec$, PaketService__currentNotification, PaketService__bootstrapperLocation, PaketService__UpdatePaketSilent$, PaketService__UpdatePaket$, PaketService__UpdatePackage$, PaketService__UpdateGroup$, PaketService__Update$, PaketService__Simplify$, PaketService__Restore$, PaketService__Remove$, PaketService__Outdated$, PaketService__Install$, PaketService__Init$, PaketService__ConvertFromNuget$, PaketService__AutoRestoreOn$, PaketService__AutoRestoreOff$, PaketService__Add$, PackageView__viewForItem$, PackageView__versionsListView, PackageView__updatePackageListView, PackageView__updateGroupListView, PackageView__settings, PackageView__removeListView, PackageView__registerVersionListView$, PackageView__registerUpdatePackageListView$, PackageView__registerUpdateGroupListView$, PackageView__registerRemoveListView$, PackageView__registerPackagesListView$, PackageView__registerListView$, PackageView__packagesListView, PackageView__name, PackageView__inCurrentProject, PackageView__handlerAddItems$, PackageView__group, PackageView__get_versionsListView$, PackageView__get_updatePackageListView$, PackageView__get_updateGroupListView$, PackageView__get_settings$, PackageView__get_removeListView$, PackageView__get_packagesListView$, PackageView__get_name$, PackageView__get_inCurrentProject$, PackageView__get_group$, PackageAddSettings___ctor$, Options___ctor$, Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__Iterate$Notification_Notification_, Option__IsSome$Int32_Int32, Option__IsSome$FSharpList_1_String___FSharpList_1_String___, Option__GetValue$Tuple_2_String____Int32_Tuple_2_String____Int32_, Option__GetValue$Tuple_2_String____FSharpList_1_String___Tuple_2_String____FSharpList_1_String___, Option__GetValue$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__GetValue$Notification_Notification_, Option__GetValue$Int32_Int32, Option__GetValue$FSharpList_1_String___FSharpList_1_String___, NotificationsOptions___ctor$, List__Tail$String___String___, List__Head$String___String___, List__Empty$String___String___, List__CreateCons$String___String___, ItemDescription___ctor$, CreateEnumerable_1_String_____ctor$String___, Atom__addCommand$Unit_Unit_, Array__ZeroCreate$String___String___, Array__ZeroCreate$Object_Object_, Array__MapIndexed$String_1_String___String_String___, Array__MapIndexed$String_1_Object_String_Object_, Array__Map$String_1_String___String_String___, Array__Map$String_1_Object_String_Object_, Array__Length$String_1String, Array__FoldIndexed$String____String_1String____String, Array__Fold$String_1_String___String_String___, Array__ConcatImpl$String_1String, Array__Concat$String_1String, Array__BoxedLength$;
 Array__BoxedLength$ = (function(xs)
 {
     return xs.length;;
@@ -268,6 +268,47 @@ PackageView__handlerAddItems$ = (function(lv,error,stdout,stderr)
     };
     var ignored0 = (lv.setItems(_35));
 });
+PackageView__registerListView$ = (function(stopChangingCallback,cancelledCallback,confirmedCallback,removeFiler)
+{
+    var listView = new atomSpaceView.SelectListView();
+    var editorView = (((listView[0]).firstChild).getModel());
+    ((editorView.getBuffer()).stoppedChangingDelay) = 200.000000;
+    null;
+    ((editorView.getBuffer()).onDidStopChanging(stopChangingCallback(editorView)(listView)));
+    var item = listView;
+    var priority = 100;
+    var panel = ((window.atom).workspace).addModalPanel((new PanelOptions___ctor$(item, false, priority)));
+    (listView.getFilterKey = (function()
+    {
+      var _722;
+      return (function(_arg1)
+      {
+        return "name";
+      })(_722);
+    }));
+    if (removeFiler) 
+    {
+      (listView.getFilterQuery = (function()
+      {
+        var _727;
+        return (function(_arg2)
+        {
+          return "";
+        })(_727);
+      }));
+    }
+    else
+    {
+      ;
+    };
+    (listView.viewForItem = (function(desc)
+    {
+      return PackageView__viewForItem$(desc);
+    }));
+    (listView.cancelled = cancelledCallback);
+    (listView.confirmed = confirmedCallback);
+    return (new TupleSelectListView__IPanel_(listView, panel));
+});
 PackageView__registerPackagesListView$ = (function(unitVar0)
 {
     var stopChangingCallback = (function(ev)
@@ -371,7 +412,7 @@ PackageView__registerPackagesListView$ = (function(unitVar0)
         return PaketService__spawnPaket$((("add nuget " + PackageView__name) + projectStr));
       };
     });
-    return PackageView__regiterListView$(stopChangingCallback, cancelledCallback, confirmedCallback, true);
+    return PackageView__registerListView$(stopChangingCallback, cancelledCallback, confirmedCallback, true);
 });
 PackageView__registerRemoveListView$ = (function(unitVar0)
 {
@@ -435,7 +476,7 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
         return PaketService__spawnPaket$((("remove nuget " + PackageView__name) + projectStr));
       };
     });
-    return PackageView__regiterListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
+    return PackageView__registerListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
 });
 PackageView__registerUpdateGroupListView$ = (function(unitVar0)
 {
@@ -473,7 +514,7 @@ PackageView__registerUpdateGroupListView$ = (function(unitVar0)
       }), PackageView__updateGroupListView);
       return PaketService__spawnPaket$(("update group " + PackageView__group));
     });
-    return PackageView__regiterListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
+    return PackageView__registerListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
 });
 PackageView__registerUpdatePackageListView$ = (function(unitVar0)
 {
@@ -537,7 +578,7 @@ PackageView__registerUpdatePackageListView$ = (function(unitVar0)
         return PaketService__spawnPaket$((("update nuget " + PackageView__name) + projectStr));
       };
     });
-    return PackageView__regiterListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
+    return PackageView__registerListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
 });
 PackageView__registerVersionListView$ = (function(unitVar0)
 {
@@ -574,48 +615,7 @@ PackageView__registerVersionListView$ = (function(unitVar0)
       }), PackageView__versionsListView);
       return PaketService__spawnPaket$(((("add nuget " + PackageView__name) + " version ") + packageDescription.data));
     });
-    return PackageView__regiterListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
-});
-PackageView__regiterListView$ = (function(stopChangingCallback,cancelledCallback,confirmedCallback,removeFiler)
-{
-    var listView = new atomSpaceView.SelectListView();
-    var editorView = (((listView[0]).firstChild).getModel());
-    ((editorView.getBuffer()).stoppedChangingDelay) = 200.000000;
-    null;
-    ((editorView.getBuffer()).onDidStopChanging(stopChangingCallback(editorView)(listView)));
-    var item = listView;
-    var priority = 100;
-    var panel = ((window.atom).workspace).addModalPanel((new PanelOptions___ctor$(item, false, priority)));
-    (listView.getFilterKey = (function()
-    {
-      var _722;
-      return (function(_arg1)
-      {
-        return "name";
-      })(_722);
-    }));
-    if (removeFiler) 
-    {
-      (listView.getFilterQuery = (function()
-      {
-        var _727;
-        return (function(_arg2)
-        {
-          return "";
-        })(_727);
-      }));
-    }
-    else
-    {
-      ;
-    };
-    (listView.viewForItem = (function(desc)
-    {
-      return PackageView__viewForItem$(desc);
-    }));
-    (listView.cancelled = cancelledCallback);
-    (listView.confirmed = confirmedCallback);
-    return (new TupleSelectListView__IPanel_(listView, panel));
+    return PackageView__registerListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
 });
 PackageView__viewForItem$ = (function(desc)
 {

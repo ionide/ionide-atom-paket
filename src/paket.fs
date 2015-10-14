@@ -74,7 +74,6 @@ module PaketService =
                 view.addClass("icon-flame") |> ignore
         )
 
-
     let spawn location (cmd : string) =
         let cmd' = cmd.Split(' ');
         let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType599>
@@ -155,7 +154,7 @@ module PaketService =
             else
                 "<li></li>" |> jq
 
-        let regiterListView stopChangingCallback cancelledCallback confirmedCallback removeFiler=
+        let registerListView stopChangingCallback cancelledCallback confirmedCallback removeFiler=
             let listView = SelectListViewCtor ()
             let editorView =
                 listView
@@ -217,7 +216,7 @@ module PaketService =
 
                                             "add nuget " + name + projectStr |> spawnPaket :> obj)
 
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback true
+            registerListView stopChangingCallback cancelledCallback confirmedCallback true
 
         let registerVersionListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
@@ -226,7 +225,7 @@ module PaketService =
                                         versionsListView |> Option.iter (fun (model, view) -> view.hide())
                                         "add nuget " + name + " version " + packageDescription.data |> spawnPaket :> obj
                 )
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
 
         let registerRemoveListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
@@ -252,7 +251,7 @@ module PaketService =
 
                                             "remove nuget " + name + projectStr |> spawnPaket :> obj)
 
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
 
         let registerUpdatePackageListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
@@ -278,7 +277,7 @@ module PaketService =
 
                                             "update nuget " + name + projectStr |> spawnPaket :> obj)
 
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
 
         let registerUpdateGroupListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
@@ -290,7 +289,7 @@ module PaketService =
                                         updateGroupListView |> Option.iter (fun (model, view) -> view.hide())
                                         "update group " + group |> spawnPaket :> obj)
 
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
 
 
 
