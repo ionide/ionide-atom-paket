@@ -133,6 +133,7 @@ module PaketService =
         let mutable versionsListView : (atom.SelectListView * IPanel) option = None
         let mutable removeListView : (atom.SelectListView * IPanel) option = None
         let mutable updatePackageListView : (atom.SelectListView * IPanel) option = None
+        let mutable updateGroupListView : (atom.SelectListView * IPanel) option = None
         let mutable inCurrentProject = false
 
         type ItemDescription = {
@@ -279,6 +280,18 @@ module PaketService =
 
             regiterListView stopChangingCallback cancelledCallback confirmedCallback false
 
+        let registerUpdateGroupListView () =
+            let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
+
+            let cancelledCallback = Func<_>(fun _ -> updateGroupListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
+
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageGroup: ItemDescription) ->
+                                        group <- packageGroup.data.Split(' ').[0].Trim()
+                                        updateGroupListView |> Option.iter (fun (model, view) -> view.hide())
+                                        "update group " + group |> spawnPaket :> obj)
+
+            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+
 
 
     let UpdatePaket () = spawn bootstrapperLocation ""
@@ -333,7 +346,7 @@ module PaketService =
 
     let UpdateGroup () =
         PackageView.inCurrentProject <- false
-        PackageView.updatePackageListView |> Option.iter(fun (model, view) ->
+        PackageView.updateGroupListView |> Option.iter(fun (model, view) ->
         let cmd = "show-groups -s"
         execPaket cmd (Func<_,_,_,_>(PackageView.handlerAddItems model))
         view.show()
@@ -350,6 +363,7 @@ type Paket() =
         PaketService.PackageView.versionsListView <- PaketService.PackageView.registerVersionListView () |> Some
         PaketService.PackageView.removeListView <- PaketService.PackageView.registerRemoveListView () |> Some
         PaketService.PackageView.updatePackageListView <- PaketService.PackageView.registerUpdatePackageListView () |> Some
+        PaketService.PackageView.updateGroupListView <- PaketService.PackageView.registerUpdateGroupListView () |> Some
         PaketService.UpdatePaketSilent()
         Atom.addCommand("atom-workspace", "Paket: Update Paket.exe", PaketService.UpdatePaket)
         Atom.addCommand("atom-workspace", "Paket: Init", PaketService.Init)

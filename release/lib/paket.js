@@ -4,7 +4,7 @@ window.$ = require('jquery');
 var atomSpaceView = require('atom-space-pen-views');
 
 function wrappedFunScript() { 
-var list_1_String____NilString___, list_1_String____ConsString___, UnfoldEnumerator_2_Int32__String_____ctor$Int32_String___, UnfoldEnumerator_2_FSharpList_1_String____String_____ctor$FSharpList_1_String____String___, TupleString____Int32, TupleString____FSharpList_1_String___, TupleSelectListView__IPanel_, String__StartsWith$, String__SplitWithoutOptions$, String__PrintFormatToString$, Seq__Unfold$Int32__String___Int32_String___, Seq__Unfold$FSharpList_1_String____String___FSharpList_1_String____String___, Seq__ToArray$String___String___, Seq__OfList$String___String___, Seq__OfArray$String___String___, Seq__IterateIndexed$String___String___, Seq__FromFactory$String___String___, Seq__FoldIndexedAux$Unit__String___Unit__String___, Seq__FoldIndexed$String____Unit_String____Unit_, Seq__Enumerator$String___String___, PanelOptions___ctor$, Paket__deactivate$, Paket__activate$, Paket___ctor$, PaketService__spawnSilent$, PaketService__spawnPaket$, PaketService__spawn$, PaketService__notice$, PaketService__location, PaketService__jq_$, PaketService__jqC$, PaketService__jq$, PaketService__handleSilent$Object_Object_, PaketService__handleExit$, PaketService__handle$Object_Object_, PaketService__get_location$, PaketService__get_currentNotification$, PaketService__get_bootstrapperLocation$, PaketService__execPaket$, PaketService__exec$, PaketService__currentNotification, PaketService__bootstrapperLocation, PaketService__UpdatePaketSilent$, PaketService__UpdatePaket$, PaketService__UpdatePackage$, PaketService__Update$, PaketService__Simplify$, PaketService__Restore$, PaketService__Remove$, PaketService__Outdated$, PaketService__Install$, PaketService__Init$, PaketService__ConvertFromNuget$, PaketService__AutoRestoreOn$, PaketService__AutoRestoreOff$, PaketService__Add$, PackageView__viewForItem$, PackageView__versionsListView, PackageView__updatePackageListView, PackageView__settings, PackageView__removeListView, PackageView__regiterListView$, PackageView__registerVersionListView$, PackageView__registerUpdatePackageListView$, PackageView__registerRemoveListView$, PackageView__registerPackagesListView$, PackageView__packagesListView, PackageView__name, PackageView__inCurrentProject, PackageView__handlerAddItems$, PackageView__group, PackageView__get_versionsListView$, PackageView__get_updatePackageListView$, PackageView__get_settings$, PackageView__get_removeListView$, PackageView__get_packagesListView$, PackageView__get_name$, PackageView__get_inCurrentProject$, PackageView__get_group$, PackageAddSettings___ctor$, Options___ctor$, Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__Iterate$Notification_Notification_, Option__IsSome$Int32_Int32, Option__IsSome$FSharpList_1_String___FSharpList_1_String___, Option__GetValue$Tuple_2_String____Int32_Tuple_2_String____Int32_, Option__GetValue$Tuple_2_String____FSharpList_1_String___Tuple_2_String____FSharpList_1_String___, Option__GetValue$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__GetValue$Notification_Notification_, Option__GetValue$Int32_Int32, Option__GetValue$FSharpList_1_String___FSharpList_1_String___, NotificationsOptions___ctor$, List__Tail$String___String___, List__Head$String___String___, List__Empty$String___String___, List__CreateCons$String___String___, ItemDescription___ctor$, CreateEnumerable_1_String_____ctor$String___, Atom__addCommand$Unit_Unit_, Array__ZeroCreate$String___String___, Array__ZeroCreate$Object_Object_, Array__MapIndexed$String_1_String___String_String___, Array__MapIndexed$String_1_Object_String_Object_, Array__Map$String_1_String___String_String___, Array__Map$String_1_Object_String_Object_, Array__Length$String_1String, Array__FoldIndexed$String____String_1String____String, Array__Fold$String_1_String___String_String___, Array__ConcatImpl$String_1String, Array__Concat$String_1String, Array__BoxedLength$;
+var list_1_String____NilString___, list_1_String____ConsString___, UnfoldEnumerator_2_Int32__String_____ctor$Int32_String___, UnfoldEnumerator_2_FSharpList_1_String____String_____ctor$FSharpList_1_String____String___, TupleString____Int32, TupleString____FSharpList_1_String___, TupleSelectListView__IPanel_, String__StartsWith$, String__SplitWithoutOptions$, String__PrintFormatToString$, Seq__Unfold$Int32__String___Int32_String___, Seq__Unfold$FSharpList_1_String____String___FSharpList_1_String____String___, Seq__ToArray$String___String___, Seq__OfList$String___String___, Seq__OfArray$String___String___, Seq__IterateIndexed$String___String___, Seq__FromFactory$String___String___, Seq__FoldIndexedAux$Unit__String___Unit__String___, Seq__FoldIndexed$String____Unit_String____Unit_, Seq__Enumerator$String___String___, PanelOptions___ctor$, Paket__deactivate$, Paket__activate$, Paket___ctor$, PaketService__spawnSilent$, PaketService__spawnPaket$, PaketService__spawn$, PaketService__notice$, PaketService__location, PaketService__jq_$, PaketService__jqC$, PaketService__jq$, PaketService__handleSilent$Object_Object_, PaketService__handleExit$, PaketService__handle$Object_Object_, PaketService__get_location$, PaketService__get_currentNotification$, PaketService__get_bootstrapperLocation$, PaketService__execPaket$, PaketService__exec$, PaketService__currentNotification, PaketService__bootstrapperLocation, PaketService__UpdatePaketSilent$, PaketService__UpdatePaket$, PaketService__UpdatePackage$, PaketService__UpdateGroup$, PaketService__Update$, PaketService__Simplify$, PaketService__Restore$, PaketService__Remove$, PaketService__Outdated$, PaketService__Install$, PaketService__Init$, PaketService__ConvertFromNuget$, PaketService__AutoRestoreOn$, PaketService__AutoRestoreOff$, PaketService__Add$, PackageView__viewForItem$, PackageView__versionsListView, PackageView__updatePackageListView, PackageView__updateGroupListView, PackageView__settings, PackageView__removeListView, PackageView__regiterListView$, PackageView__registerVersionListView$, PackageView__registerUpdatePackageListView$, PackageView__registerUpdateGroupListView$, PackageView__registerRemoveListView$, PackageView__registerPackagesListView$, PackageView__packagesListView, PackageView__name, PackageView__inCurrentProject, PackageView__handlerAddItems$, PackageView__group, PackageView__get_versionsListView$, PackageView__get_updatePackageListView$, PackageView__get_updateGroupListView$, PackageView__get_settings$, PackageView__get_removeListView$, PackageView__get_packagesListView$, PackageView__get_name$, PackageView__get_inCurrentProject$, PackageView__get_group$, PackageAddSettings___ctor$, Options___ctor$, Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__Iterate$Notification_Notification_, Option__IsSome$Int32_Int32, Option__IsSome$FSharpList_1_String___FSharpList_1_String___, Option__GetValue$Tuple_2_String____Int32_Tuple_2_String____Int32_, Option__GetValue$Tuple_2_String____FSharpList_1_String___Tuple_2_String____FSharpList_1_String___, Option__GetValue$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_, Option__GetValue$Notification_Notification_, Option__GetValue$Int32_Int32, Option__GetValue$FSharpList_1_String___FSharpList_1_String___, NotificationsOptions___ctor$, List__Tail$String___String___, List__Head$String___String___, List__Empty$String___String___, List__CreateCons$String___String___, ItemDescription___ctor$, CreateEnumerable_1_String_____ctor$String___, Atom__addCommand$Unit_Unit_, Array__ZeroCreate$String___String___, Array__ZeroCreate$Object_Object_, Array__MapIndexed$String_1_String___String_String___, Array__MapIndexed$String_1_Object_String_Object_, Array__Map$String_1_String___String_String___, Array__Map$String_1_Object_String_Object_, Array__Length$String_1String, Array__FoldIndexed$String____String_1String____String, Array__Fold$String_1_String___String_String___, Array__ConcatImpl$String_1String, Array__Concat$String_1String, Array__BoxedLength$;
 Array__BoxedLength$ = (function(xs)
 {
     return xs.length;;
@@ -240,6 +240,10 @@ PackageView__get_settings$ = (function()
 {
     return (new PackageAddSettings___ctor$(false, false));
 });
+PackageView__get_updateGroupListView$ = (function()
+{
+    return {Tag: 0.000000};
+});
 PackageView__get_updatePackageListView$ = (function()
 {
     return {Tag: 0.000000};
@@ -430,6 +434,44 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
         var projectStr = _851;
         return PaketService__spawnPaket$((("remove nuget " + PackageView__name) + projectStr));
       };
+    });
+    return PackageView__regiterListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
+});
+PackageView__registerUpdateGroupListView$ = (function(unitVar0)
+{
+    var stopChangingCallback = (function(ev)
+    {
+      return (function(lv)
+      {
+        return (function(_unitVar0)
+        {
+          ;
+        });
+      });
+    });
+    var cancelledCallback = (function()
+    {
+      var _978;
+      return (function(_arg1)
+      {
+        return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
+        {
+          var model = tupledArg.Items[0.000000];
+          var view = tupledArg.Items[1.000000];
+          return (view.hide());
+        }), PackageView__updateGroupListView);
+      })(_978);
+    });
+    var confirmedCallback = (function(packageGroup)
+    {
+      PackageView__group = String__SplitWithoutOptions$(packageGroup.data, [" "])[0].trim();
+      Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
+      {
+        var model = tupledArg.Items[0.000000];
+        var view = tupledArg.Items[1.000000];
+        return (view.hide());
+      }), PackageView__updateGroupListView);
+      return PaketService__spawnPaket$(("update group " + PackageView__group));
     });
     return PackageView__regiterListView$(stopChangingCallback, cancelledCallback, confirmedCallback, false);
 });
@@ -632,18 +674,18 @@ PaketService__Remove$ = (function(inCurrentProject,unitVar1)
     {
       var model = tupledArg.Items[0.000000];
       var view = tupledArg.Items[1.000000];
-      var _1129;
+      var _1176;
       if ((!inCurrentProject)) 
       {
-        _1129 = "show-installed-packages -s";
+        _1176 = "show-installed-packages -s";
       }
       else
       {
         var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
         var projectStr = ((" project \"" + path) + "\"");
-        _1129 = (("show-installed-packages" + projectStr) + " -s");
+        _1176 = (("show-installed-packages" + projectStr) + " -s");
       };
-      var cmd = _1129;
+      var cmd = _1176;
       PaketService__execPaket$(cmd, (function(delegateArg,_delegateArg,__delegateArg)
       {
         return (function(error)
@@ -673,6 +715,31 @@ PaketService__Update$ = (function(unitVar0)
 {
     return PaketService__spawnPaket$("update");
 });
+PaketService__UpdateGroup$ = (function(unitVar0)
+{
+    PackageView__inCurrentProject = false;
+    return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
+    {
+      var model = tupledArg.Items[0.000000];
+      var view = tupledArg.Items[1.000000];
+      var cmd = "show-groups -s";
+      PaketService__execPaket$(cmd, (function(delegateArg,_delegateArg,__delegateArg)
+      {
+        return (function(error)
+        {
+          return (function(stdout)
+          {
+            return (function(stderr)
+            {
+              return PackageView__handlerAddItems$(model, error, stdout, stderr);
+            });
+          });
+        })(delegateArg)(_delegateArg)(__delegateArg);
+      }));
+      (view.show());
+      var ignored0 = (model.focusFilterEditor());
+    }), PackageView__updateGroupListView);
+});
 PaketService__UpdatePackage$ = (function(inCurrentProject,unitVar1)
 {
     PackageView__inCurrentProject = inCurrentProject;
@@ -680,18 +747,18 @@ PaketService__UpdatePackage$ = (function(inCurrentProject,unitVar1)
     {
       var model = tupledArg.Items[0.000000];
       var view = tupledArg.Items[1.000000];
-      var _1183;
+      var _1258;
       if ((!inCurrentProject)) 
       {
-        _1183 = "show-installed-packages -s";
+        _1258 = "show-installed-packages -s";
       }
       else
       {
         var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
         var projectStr = ((" project \"" + path) + "\"");
-        _1183 = (("show-installed-packages" + projectStr) + " -s");
+        _1258 = (("show-installed-packages" + projectStr) + " -s");
       };
-      var cmd = _1183;
+      var cmd = _1258;
       PaketService__execPaket$(cmd, (function(delegateArg,_delegateArg,__delegateArg)
       {
         return (function(error)
@@ -882,18 +949,18 @@ PaketService__spawnSilent$ = (function(location,cmd)
 {
     var cmd_ = String__SplitWithoutOptions$(cmd, [" "]);
     var options = (new Options___ctor$((((window.atom).project).getPaths())[0]));
-    var _995;
+    var _1042;
     if (String__StartsWith$(((window.process).platform), "win")) 
     {
-      _995 = (child_process.spawn(location, cmd_, options));
+      _1042 = (child_process.spawn(location, cmd_, options));
     }
     else
     {
       var prms = Array__Concat$String_1String(Seq__OfList$String___String___(List__CreateCons$String___String___([location], List__CreateCons$String___String___(cmd_, List__Empty$String___String___()))));
       var path = (((window.atom).config).get("ionide-paket.MonoPath"));
-      _995 = (child_process.spawn((path + "/mono"), prms, options));
+      _1042 = (child_process.spawn((path + "/mono"), prms, options));
     };
-    var procs = _995;
+    var procs = _1042;
     var ignored0 = (procs.on("exit", (function(input)
     {
       return PaketService__handleSilent$Object_Object_(input);
@@ -929,6 +996,10 @@ Paket__activate$ = (function(x,state)
     {
       return {Tag: 1.000000, Value: arg0};
     })(PackageView__registerUpdatePackageListView$());
+    PackageView__updateGroupListView = (function(arg0)
+    {
+      return {Tag: 1.000000, Value: arg0};
+    })(PackageView__registerUpdateGroupListView$());
     PaketService__UpdatePaketSilent$();
     Atom__addCommand$Unit_Unit_("atom-workspace", "Paket: Update Paket.exe", (function(arg00_)
     {
@@ -978,6 +1049,10 @@ Paket__activate$ = (function(x,state)
     Atom__addCommand$Unit_Unit_("atom-workspace", "Paket: Remove NuGet Package (from current project)", (function(arg10_)
     {
       return PaketService__Remove$(_inCurrentProject, arg10_);
+    }));
+    Atom__addCommand$Unit_Unit_("atom-workspace", "Paket: Update Group", (function(arg00_)
+    {
+      return PaketService__UpdateGroup$();
     }));
     var __inCurrentProject = false;
     Atom__addCommand$Unit_Unit_("atom-workspace", "Paket: Update NuGet Package", (function(arg10_)
@@ -1318,6 +1393,7 @@ PaketService__currentNotification = PaketService__get_currentNotification$();
 PackageView__removeListView = PackageView__get_removeListView$();
 PackageView__inCurrentProject = PackageView__get_inCurrentProject$();
 PackageView__updatePackageListView = PackageView__get_updatePackageListView$();
+PackageView__updateGroupListView = PackageView__get_updateGroupListView$();
 PaketService__bootstrapperLocation = PaketService__get_bootstrapperLocation$();
 return [(function(ign)
 {
