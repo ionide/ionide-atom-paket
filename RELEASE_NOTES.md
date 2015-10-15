@@ -1,3 +1,7 @@
+### 2.2.0 - 15.10.2015
+* Add Update Group command
+* Update syntax highlighting for groups
+
 ### 2.1.2 - 13.10.2015
 * Small bug fixes
 
