@@ -1,5 +1,5 @@
 'fileTypes': [
-  'dependencies'
+  'lock'
 ]
 'foldingStartMarker': ''
 'foldingStopMarker': ''
@@ -75,7 +75,7 @@
   'keywords':
     'patterns': [
       {
-        'match': '\\b(source|github|nuget|gist|http)\\b'
+        'match': '\\b(GITHUB|NUGET|GIST|HTTP|GROUP|specs|remote)\\b'
         'name': 'keyword.other.fsharp'
       }
     ]
