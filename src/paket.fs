@@ -74,7 +74,6 @@ module PaketService =
                 view.addClass("icon-flame") |> ignore
         )
 
-
     let spawn location (cmd : string) =
         let cmd' = cmd.Split(' ');
         let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType599>
@@ -133,6 +132,7 @@ module PaketService =
         let mutable versionsListView : (atom.SelectListView * IPanel) option = None
         let mutable removeListView : (atom.SelectListView * IPanel) option = None
         let mutable updatePackageListView : (atom.SelectListView * IPanel) option = None
+        let mutable updateGroupListView : (atom.SelectListView * IPanel) option = None
         let mutable inCurrentProject = false
 
         type ItemDescription = {
@@ -154,7 +154,7 @@ module PaketService =
             else
                 "<li></li>" |> jq
 
-        let regiterListView stopChangingCallback cancelledCallback confirmedCallback removeFiler=
+        let registerListView stopChangingCallback cancelledCallback confirmedCallback removeFiler=
             let listView = SelectListViewCtor ()
             let editorView =
                 listView
@@ -216,7 +216,7 @@ module PaketService =
 
                                             "add nuget " + name + projectStr |> spawnPaket :> obj)
 
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback true
+            registerListView stopChangingCallback cancelledCallback confirmedCallback true
 
         let registerVersionListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
@@ -225,7 +225,7 @@ module PaketService =
                                         versionsListView |> Option.iter (fun (model, view) -> view.hide())
                                         "add nuget " + name + " version " + packageDescription.data |> spawnPaket :> obj
                 )
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
 
         let registerRemoveListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
@@ -251,7 +251,7 @@ module PaketService =
 
                                             "remove nuget " + name + projectStr |> spawnPaket :> obj)
 
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
 
         let registerUpdatePackageListView () =
             let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
@@ -277,7 +277,19 @@ module PaketService =
 
                                             "update nuget " + name + projectStr |> spawnPaket :> obj)
 
-            regiterListView stopChangingCallback cancelledCallback confirmedCallback false
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
+
+        let registerUpdateGroupListView () =
+            let stopChangingCallback (ev : IEditor) (lv : atom.SelectListView) = fun () -> ()
+
+            let cancelledCallback = Func<_>(fun _ -> updateGroupListView |> Option.iter(fun (model, view) ->  view.hide()) :> obj)
+
+            let confirmedCallback = unbox<Func<_, _>> (fun (packageGroup: ItemDescription) ->
+                                        group <- packageGroup.data.Split(' ').[0].Trim()
+                                        updateGroupListView |> Option.iter (fun (model, view) -> view.hide())
+                                        "update group " + group |> spawnPaket :> obj)
+
+            registerListView stopChangingCallback cancelledCallback confirmedCallback false
 
 
 
@@ -331,6 +343,16 @@ module PaketService =
 
         )
 
+    let UpdateGroup () =
+        PackageView.inCurrentProject <- false
+        PackageView.updateGroupListView |> Option.iter(fun (model, view) ->
+        let cmd = "show-groups -s"
+        execPaket cmd (Func<_,_,_,_>(PackageView.handlerAddItems model))
+        view.show()
+        model.focusFilterEditor() |> ignore
+
+        )
+
 
 type Paket() =
 
@@ -340,6 +362,7 @@ type Paket() =
         PaketService.PackageView.versionsListView <- PaketService.PackageView.registerVersionListView () |> Some
         PaketService.PackageView.removeListView <- PaketService.PackageView.registerRemoveListView () |> Some
         PaketService.PackageView.updatePackageListView <- PaketService.PackageView.registerUpdatePackageListView () |> Some
+        PaketService.PackageView.updateGroupListView <- PaketService.PackageView.registerUpdateGroupListView () |> Some
         PaketService.UpdatePaketSilent()
         Atom.addCommand("atom-workspace", "Paket: Update Paket.exe", PaketService.UpdatePaket)
         Atom.addCommand("atom-workspace", "Paket: Init", PaketService.Init)
@@ -352,6 +375,7 @@ type Paket() =
         Atom.addCommand("atom-workspace", "Paket: Add NuGet Package Version", PaketService.Add { Versioned =  true; AddToCurrentProject = false })
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package", PaketService.Remove false)
         Atom.addCommand("atom-workspace", "Paket: Remove NuGet Package (from current project)", PaketService.Remove true )
+        Atom.addCommand("atom-workspace", "Paket: Update Group", PaketService.UpdateGroup)
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package", PaketService.UpdatePackage false)
         Atom.addCommand("atom-workspace", "Paket: Update NuGet Package (from current project)", PaketService.UpdatePackage true )
         Atom.addCommand("atom-workspace", "Paket: Auto Restore On", PaketService.AutoRestoreOn)
