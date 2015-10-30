@@ -75,7 +75,7 @@
   'keywords':
     'patterns': [
       {
-        'match': '\\b(source|github|nuget|gist|http|group)\\b'
+        'match': '\\b(source|github|nuget|gist|http|group|strategy)\\b'
         'name': 'keyword.other.fsharp'
       }
     ]
