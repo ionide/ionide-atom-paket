@@ -1,3 +1,6 @@
+### 2.2.1 - 30.10.2015
+* Strategy is a keyword
+
 ### 2.2.0 - 15.10.2015
 * Add Update Group command
 * Update syntax highlighting for groups
