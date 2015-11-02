@@ -1,3 +1,6 @@
+### 2.2.2 - 02.11.2015
+* Update Readme
+
 ### 2.2.1 - 30.10.2015
 * Strategy is a keyword
 
