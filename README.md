@@ -1,4 +1,4 @@
-# Ionide-Paket 
+# Ionide-Paket
 
 It's part of [Ionide](http://ionide.io) plugin suite.
 [Paket](https://github.com/fsprojects/Paket) is package dependency manager for .NET with support for NuGet packages and GitHub repositories.
@@ -25,9 +25,3 @@ the project and submit pull requests.
 
 The library is available under [MIT license](https://github.com/ionide/ionide-paket/blob/master/LICENSE.md), which allows modification and
 redistribution for both commercial and non-commercial purposes.
-
-## Code of Conduct
-
-This project adheres to No Code of Conduct. We are all adults. We accept everyone's contributions. Nothing else matters.
-
-For more information please visit the [No Code of Conduct](https://github.com/domgetter/NCoC) homepage.
