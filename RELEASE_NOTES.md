@@ -1,3 +1,6 @@
+### 2.2.3 - 04.12.2015
+* Fix null input for handle function
+
 ### 2.2.2 - 02.11.2015
 * Update Readme
 
