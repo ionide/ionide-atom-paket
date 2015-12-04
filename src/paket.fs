@@ -48,13 +48,14 @@ module PaketService =
 
 
     let handle error input =
-        let output = input.ToString()
-        Globals.console.log(output)
-        if error then
-            notice true "Paket error" output
-        else
-            notice false "" output
-        ()
+        if input <> null then
+            let output = input.ToString()
+            Globals.console.log(output)
+            if error then
+                notice true "Paket error" output
+            else
+                notice false "" output
+            ()
 
     let handleSilent input =
         if input <> null then
