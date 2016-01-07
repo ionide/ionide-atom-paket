@@ -53,4 +53,5 @@ release.cmd
 paket.exe
 .fake/
 paket.js
-release/lib/paket.js
+/release/lib/paket.js
+release/lib

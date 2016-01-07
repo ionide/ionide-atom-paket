@@ -4,8 +4,10 @@ module Ionide.Paket
 open System
 open FunScript
 open FunScript.TypeScript
+open FunScript.TypeScript.fs
 open FunScript.TypeScript.child_process
 open FunScript.TypeScript.AtomCore
+open FunScript.TypeScript.path
 open Atom
 
 module PaketService =
@@ -77,45 +79,95 @@ module PaketService =
 
     let spawn location (cmd : string) =
         let cmd' = cmd.Split(' ');
-        let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType599>
-        let procs = if Globals._process.platform.StartsWith("win") then
-                        Globals.spawn(location, cmd', options)
-                    else
-                        let prms = Array.concat [ [|location|]; cmd']
-                        let path = Globals.atom.config.get("ionide-paket.MonoPath") |> unbox<string>
-                        Globals.spawn(path + "/mono", prms, options)
+        let cwd =
+            try
+                let t = Globals.atom.project.getPaths().[0]
+                if Globals.existsSync t then
+                    t
+                else
+                    null
+            with
+            | _ -> null
+        let options =
+            try
+                {cwd = cwd} |> unbox<AnonymousType599>
+            with
+            | _ -> null |> unbox<AnonymousType599>
+        try
 
-        currentNotification <- None
-        procs.on("exit",unbox<Function>(handleExit)) |> ignore
-        procs.stdout.on("data", unbox<Function>(handle false )) |> ignore
-        procs.stderr.on("data", unbox<Function>(handle true )) |> ignore
-        ()
+            let procs = if Globals._process.platform.StartsWith("win") then
+                            Globals.spawn(location, cmd', options)
+                        else
+                            let prms = Array.concat [ [|location|]; cmd']
+                            let monoPath = Globals.atom.config.get("ionide-paket.MonoPath") |> unbox<string>
+                            let p = Globals.joinOverload2 (monoPath, "mono")
+                            Globals.spawn(p, prms, options)
+            currentNotification <- None
+            procs.on("exit",unbox<Function>(handleExit)) |> ignore
+            procs.stdout.on("data", unbox<Function>(handle false )) |> ignore
+            procs.stderr.on("data", unbox<Function>(handle true )) |> ignore
+            ()
+        with
+        | ex -> Globals.console.error(ex)
 
     let spawnSilent location (cmd : string) =
         let cmd' = cmd.Split(' ');
-        let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType599>
-        let procs = if Globals._process.platform.StartsWith("win") then
-                        Globals.spawn(location, cmd', options)
-                    else
-                        let prms = Array.concat [ [|location|]; cmd']
-                        let path = Globals.atom.config.get("ionide-paket.MonoPath") |> unbox<string>
-                        Globals.spawn(path + "/mono", prms, options)
-        procs.on("exit",unbox<Function>(handleSilent)) |> ignore
-        procs.stdout.on("data", unbox<Function>(handleSilent )) |> ignore
-        procs.stderr.on("data", unbox<Function>(handleSilent )) |> ignore
-        ()
+        let cwd =
+            try
+                let t = Globals.atom.project.getPaths().[0]
+                if Globals.existsSync t then
+                    t
+                else
+                    null
+            with
+            | _ -> null
+        let options =
+            try
+                {cwd = cwd} |> unbox<AnonymousType599>
+            with
+            | _ -> null |> unbox<AnonymousType599>
+        try
+            let procs = if Globals._process.platform.StartsWith("win") then
+                            Globals.spawn(location, cmd', options)
+                        else
+                            let prms = Array.concat [ [|location|]; cmd']
+                            let monoPath = Globals.atom.config.get("ionide-paket.MonoPath") |> unbox<string>
+                            let p = Globals.joinOverload2 (monoPath, "mono")
+                            Globals.spawn(p, prms, options)
+            procs.on("exit",unbox<Function>(handleSilent)) |> ignore
+            procs.stdout.on("data", unbox<Function>(handleSilent )) |> ignore
+            procs.stderr.on("data", unbox<Function>(handleSilent )) |> ignore
+            ()
+        with
+        | ex -> Globals.console.error(ex)
 
 
 
     let exec location cmd handler =
-        let options = {cwd = Globals.atom.project.getPaths().[0]} |> unbox<AnonymousType600>
+        let cwd =
+            try
+                let t = Globals.atom.project.getPaths().[0]
+                if Globals.existsSync t then
+                    t
+                else
+                    null
+            with
+            | _ -> null
+        let options =
+            try
+                {cwd = cwd} |> unbox<AnonymousType600>
+            with
+            | _ -> null |> unbox<AnonymousType600>
+        try
 
-        let child =
-            if Globals._process.platform.StartsWith("win") then
-                Globals.exec(location + " " + cmd, options, handler )
-            else
-                Globals.exec("mono " + location + " " + cmd, options, handler )
-        ()
+            let child =
+                if Globals._process.platform.StartsWith("win") then
+                    Globals.exec(location + " " + cmd, options, handler )
+                else
+                    Globals.exec("mono " + location + " " + cmd, options, handler )
+            ()
+        with
+        | ex -> Globals.console.error(ex)
 
     let execPaket cmd handler = exec location cmd handler
     let spawnPaket cmd = spawn location cmd
