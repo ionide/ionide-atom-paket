@@ -1,6 +1,7 @@
 var CompositeDisposable = require('atom').CompositeDisposable;
 var child_process = require('child_process');
 window.$ = require('jquery');
+var fs = require('fs');
 var atomSpaceView = require('atom-space-pen-views');
 
 function wrappedFunScript() { 
@@ -280,21 +281,21 @@ PackageView__registerListView$ = (function(stopChangingCallback,cancelledCallbac
     var panel = ((window.atom).workspace).addModalPanel((new PanelOptions___ctor$(item, false, priority)));
     (listView.getFilterKey = (function()
     {
-      var _725;
+      var _740;
       return (function(_arg1)
       {
         return "name";
-      })(_725);
+      })(_740);
     }));
     if (removeFiler) 
     {
       (listView.getFilterQuery = (function()
       {
-        var _730;
+        var _745;
         return (function(_arg2)
         {
           return "";
-        })(_730);
+        })(_745);
       }));
     }
     else
@@ -344,7 +345,7 @@ PackageView__registerPackagesListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _356;
+      var _363;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -353,7 +354,7 @@ PackageView__registerPackagesListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__packagesListView);
-      })(_356);
+      })(_363);
     });
     var confirmedCallback = (function(packageDescription)
     {
@@ -391,24 +392,24 @@ PackageView__registerPackagesListView$ = (function(unitVar0)
       }
       else
       {
-        var _407;
+        var _414;
         if ((!PackageView__settings.AddToCurrentProject)) 
         {
-          _407 = "";
+          _414 = "";
         }
         else
         {
           try
           {
             var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
-            _407 = ((" project \"" + path) + "\"");
+            _414 = ((" project \"" + path) + "\"");
           }
           catch(matchValue){
             PaketService__notice$(true, "Paket error", ".*proj file needs to be open");
-            _407 = "";
+            _414 = "";
           };
         };
-        var projectStr = _407;
+        var projectStr = _414;
         return PaketService__spawnPaket$((("add nuget " + PackageView__name) + projectStr));
       };
     });
@@ -428,7 +429,7 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _813;
+      var _828;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -437,7 +438,7 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__removeListView);
-      })(_813);
+      })(_828);
     });
     var confirmedCallback = (function(packageDescription)
     {
@@ -455,24 +456,24 @@ PackageView__registerRemoveListView$ = (function(unitVar0)
       }
       else
       {
-        var _854;
+        var _869;
         if ((!PackageView__settings.AddToCurrentProject)) 
         {
-          _854 = "";
+          _869 = "";
         }
         else
         {
           try
           {
             var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
-            _854 = ((" project \"" + path) + "\"");
+            _869 = ((" project \"" + path) + "\"");
           }
           catch(matchValue){
             PaketService__notice$(true, "Paket error", ".*proj file needs to be open");
-            _854 = "";
+            _869 = "";
           };
         };
-        var projectStr = _854;
+        var projectStr = _869;
         return PaketService__spawnPaket$((("remove nuget " + PackageView__name) + projectStr));
       };
     });
@@ -492,7 +493,7 @@ PackageView__registerUpdateGroupListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _981;
+      var _996;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -501,7 +502,7 @@ PackageView__registerUpdateGroupListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__updateGroupListView);
-      })(_981);
+      })(_996);
     });
     var confirmedCallback = (function(packageGroup)
     {
@@ -530,7 +531,7 @@ PackageView__registerUpdatePackageListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _897;
+      var _912;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -539,7 +540,7 @@ PackageView__registerUpdatePackageListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__updatePackageListView);
-      })(_897);
+      })(_912);
     });
     var confirmedCallback = (function(packageDescription)
     {
@@ -557,24 +558,24 @@ PackageView__registerUpdatePackageListView$ = (function(unitVar0)
       }
       else
       {
-        var _938;
+        var _953;
         if ((!PackageView__settings.AddToCurrentProject)) 
         {
-          _938 = "";
+          _953 = "";
         }
         else
         {
           try
           {
             var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
-            _938 = ((" project \"" + path) + "\"");
+            _953 = ((" project \"" + path) + "\"");
           }
           catch(matchValue){
             PaketService__notice$(true, "Paket error", ".*proj file needs to be open");
-            _938 = "";
+            _953 = "";
           };
         };
-        var projectStr = _938;
+        var projectStr = _953;
         return PaketService__spawnPaket$((("update nuget " + PackageView__name) + projectStr));
       };
     });
@@ -594,7 +595,7 @@ PackageView__registerVersionListView$ = (function(unitVar0)
     });
     var cancelledCallback = (function()
     {
-      var _772;
+      var _787;
       return (function(_arg1)
       {
         return Option__Iterate$Tuple_2_SelectListView__IPanel_Tuple_2_SelectListView__IPanel_((function(tupledArg)
@@ -603,7 +604,7 @@ PackageView__registerVersionListView$ = (function(unitVar0)
           var view = tupledArg.Items[1.000000];
           return (view.hide());
         }), PackageView__versionsListView);
-      })(_772);
+      })(_787);
     });
     var confirmedCallback = (function(packageDescription)
     {
@@ -674,18 +675,18 @@ PaketService__Remove$ = (function(inCurrentProject,unitVar1)
     {
       var model = tupledArg.Items[0.000000];
       var view = tupledArg.Items[1.000000];
-      var _1179;
+      var _1202;
       if ((!inCurrentProject)) 
       {
-        _1179 = "show-installed-packages -s";
+        _1202 = "show-installed-packages -s";
       }
       else
       {
         var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
         var projectStr = ((" project \"" + path) + "\"");
-        _1179 = (("show-installed-packages" + projectStr) + " -s");
+        _1202 = (("show-installed-packages" + projectStr) + " -s");
       };
-      var cmd = _1179;
+      var cmd = _1202;
       PaketService__execPaket$(cmd, (function(delegateArg,_delegateArg,__delegateArg)
       {
         return (function(error)
@@ -747,18 +748,18 @@ PaketService__UpdatePackage$ = (function(inCurrentProject,unitVar1)
     {
       var model = tupledArg.Items[0.000000];
       var view = tupledArg.Items[1.000000];
-      var _1261;
+      var _1284;
       if ((!inCurrentProject)) 
       {
-        _1261 = "show-installed-packages -s";
+        _1284 = "show-installed-packages -s";
       }
       else
       {
         var path = ((((((window.atom).workspace).getActiveTextEditor()).buffer).file).path);
         var projectStr = ((" project \"" + path) + "\"");
-        _1261 = (("show-installed-packages" + projectStr) + " -s");
+        _1284 = (("show-installed-packages" + projectStr) + " -s");
       };
-      var cmd = _1261;
+      var cmd = _1284;
       PaketService__execPaket$(cmd, (function(delegateArg,_delegateArg,__delegateArg)
       {
         return (function(error)
@@ -786,17 +787,48 @@ PaketService__UpdatePaketSilent$ = (function(unitVar0)
 });
 PaketService__exec$ = (function(location,cmd,handler)
 {
-    var options = (new Options___ctor$((((window.atom).project).getPaths())[0]));
-    var _315;
-    if (String__StartsWith$(((window.process).platform), "win")) 
+    var _308;
+    try
     {
-      _315 = (child_process.exec(((location + " ") + cmd), options, handler));
+      var t = (((window.atom).project).getPaths())[0];
+      if ((fs.existsSync(t))) 
+      {
+        _308 = t;
+      }
+      else
+      {
+        _308 = null;
+      };
     }
-    else
-    {
-      _315 = (child_process.exec(((("mono " + location) + " ") + cmd), options, handler));
+    catch(matchValue){
+      _308 = null;
     };
-    var child = _315;
+    var cwd = _308;
+    var _316;
+    try
+    {
+      _316 = (new Options___ctor$(cwd));
+    }
+    catch(_matchValue){
+      _316 = null;
+    };
+    var options = _316;
+    try
+    {
+      var _320;
+      if (String__StartsWith$(((window.process).platform), "win")) 
+      {
+        _320 = (child_process.exec(((location + " ") + cmd), options, handler));
+      }
+      else
+      {
+        _320 = (child_process.exec(((("mono " + location) + " ") + cmd), options, handler));
+      };
+      var child = _320;
+    }
+    catch(ex){
+      return ((window.console).error(ex));
+    };
 });
 PaketService__execPaket$ = (function(cmd,handler)
 {
@@ -895,16 +927,16 @@ PaketService__notice$ = (function(isError,text,details)
 {
     if ((PaketService__currentNotification.Tag == 0.000000)) 
     {
-      var _427;
+      var _434;
       if (isError) 
       {
-        _427 = ((window.atom).notifications).addError(text, (new NotificationsOptions___ctor$(details, true)));
+        _434 = ((window.atom).notifications).addError(text, (new NotificationsOptions___ctor$(details, true)));
       }
       else
       {
-        _427 = ((window.atom).notifications).addInfo(text, (new NotificationsOptions___ctor$(details, true)));
+        _434 = ((window.atom).notifications).addInfo(text, (new NotificationsOptions___ctor$(details, true)));
       };
-      var n = _427;
+      var n = _434;
       PaketService__currentNotification = {Tag: 1.000000, Value: n};
     }
     else
@@ -919,34 +951,66 @@ PaketService__notice$ = (function(isError,text,details)
 PaketService__spawn$ = (function(location,cmd)
 {
     var cmd_ = String__SplitWithoutOptions$(cmd, [" "]);
-    var options = (new Options___ctor$((((window.atom).project).getPaths())[0]));
     var _484;
-    if (String__StartsWith$(((window.process).platform), "win")) 
+    try
     {
-      _484 = (child_process.spawn(location, cmd_, options));
+      var t = (((window.atom).project).getPaths())[0];
+      if ((fs.existsSync(t))) 
+      {
+        _484 = t;
+      }
+      else
+      {
+        _484 = null;
+      };
     }
-    else
-    {
-      var prms = Array__Concat$String_1String(Seq__OfList$String___String___(List__CreateCons$String___String___([location], List__CreateCons$String___String___(cmd_, List__Empty$String___String___()))));
-      var path = (((window.atom).config).get("ionide-paket.MonoPath"));
-      _484 = (child_process.spawn((path + "/mono"), prms, options));
+    catch(matchValue){
+      _484 = null;
     };
-    var procs = _484;
-    PaketService__currentNotification = {Tag: 0.000000};
-    var ignored0 = (procs.on("exit", (function(code)
+    var cwd = _484;
+    var _492;
+    try
     {
-      return PaketService__handleExit$(code);
-    })));
-    var error = false;
-    var _ignored0 = ((procs.stdout).on("data", (function(input)
+      _492 = (new Options___ctor$(cwd));
+    }
+    catch(_matchValue){
+      _492 = null;
+    };
+    var options = _492;
+    try
     {
-      return PaketService__handle$Object_Object_(error, input);
-    })));
-    var _error = true;
-    var __ignored0 = ((procs.stderr).on("data", (function(input)
-    {
-      return PaketService__handle$Object_Object_(_error, input);
-    })));
+      var _496;
+      if (String__StartsWith$(((window.process).platform), "win")) 
+      {
+        _496 = (child_process.spawn(location, cmd_, options));
+      }
+      else
+      {
+        var prms = Array__Concat$String_1String(Seq__OfList$String___String___(List__CreateCons$String___String___([location], List__CreateCons$String___String___(cmd_, List__Empty$String___String___()))));
+        var monoPath = (((window.atom).config).get("ionide-paket.MonoPath"));
+        var p = (path.join(monoPath, "mono"));
+        _496 = (child_process.spawn(p, prms, options));
+      };
+      var procs = _496;
+      PaketService__currentNotification = {Tag: 0.000000};
+      var ignored0 = (procs.on("exit", (function(code)
+      {
+        return PaketService__handleExit$(code);
+      })));
+      var error = false;
+      var _ignored0 = ((procs.stdout).on("data", (function(input)
+      {
+        return PaketService__handle$Object_Object_(error, input);
+      })));
+      var _error = true;
+      var __ignored0 = ((procs.stderr).on("data", (function(input)
+      {
+        return PaketService__handle$Object_Object_(_error, input);
+      })));
+    }
+    catch(ex){
+      return ((window.console).error(ex));
+    };
 });
 PaketService__spawnPaket$ = (function(cmd)
 {
@@ -955,31 +1019,63 @@ PaketService__spawnPaket$ = (function(cmd)
 PaketService__spawnSilent$ = (function(location,cmd)
 {
     var cmd_ = String__SplitWithoutOptions$(cmd, [" "]);
-    var options = (new Options___ctor$((((window.atom).project).getPaths())[0]));
-    var _1045;
-    if (String__StartsWith$(((window.process).platform), "win")) 
+    var _1053;
+    try
     {
-      _1045 = (child_process.spawn(location, cmd_, options));
+      var t = (((window.atom).project).getPaths())[0];
+      if ((fs.existsSync(t))) 
+      {
+        _1053 = t;
+      }
+      else
+      {
+        _1053 = null;
+      };
     }
-    else
-    {
-      var prms = Array__Concat$String_1String(Seq__OfList$String___String___(List__CreateCons$String___String___([location], List__CreateCons$String___String___(cmd_, List__Empty$String___String___()))));
-      var path = (((window.atom).config).get("ionide-paket.MonoPath"));
-      _1045 = (child_process.spawn((path + "/mono"), prms, options));
+    catch(matchValue){
+      _1053 = null;
     };
-    var procs = _1045;
-    var ignored0 = (procs.on("exit", (function(input)
+    var cwd = _1053;
+    var _1061;
+    try
     {
-      return PaketService__handleSilent$Object_Object_(input);
-    })));
-    var _ignored0 = ((procs.stdout).on("data", (function(input)
+      _1061 = (new Options___ctor$(cwd));
+    }
+    catch(_matchValue){
+      _1061 = null;
+    };
+    var options = _1061;
+    try
     {
-      return PaketService__handleSilent$Object_Object_(input);
-    })));
-    var __ignored0 = ((procs.stderr).on("data", (function(input)
-    {
-      return PaketService__handleSilent$Object_Object_(input);
-    })));
+      var _1065;
+      if (String__StartsWith$(((window.process).platform), "win")) 
+      {
+        _1065 = (child_process.spawn(location, cmd_, options));
+      }
+      else
+      {
+        var prms = Array__Concat$String_1String(Seq__OfList$String___String___(List__CreateCons$String___String___([location], List__CreateCons$String___String___(cmd_, List__Empty$String___String___()))));
+        var monoPath = (((window.atom).config).get("ionide-paket.MonoPath"));
+        var p = (path.join(monoPath, "mono"));
+        _1065 = (child_process.spawn(p, prms, options));
+      };
+      var procs = _1065;
+      var ignored0 = (procs.on("exit", (function(input)
+      {
+        return PaketService__handleSilent$Object_Object_(input);
+      })));
+      var _ignored0 = ((procs.stdout).on("data", (function(input)
+      {
+        return PaketService__handleSilent$Object_Object_(input);
+      })));
+      var __ignored0 = ((procs.stderr).on("data", (function(input)
+      {
+        return PaketService__handleSilent$Object_Object_(input);
+      })));
+    }
+    catch(ex){
+      return ((window.console).error(ex));
+    };
 });
 Paket___ctor$ = (function(unitVar0)
 {
@@ -1233,8 +1329,8 @@ Seq__Unfold$FSharpList_1_String____String___FSharpList_1_String____String___ = (
           });
           return (Option__IsSome$FSharpList_1_String___FSharpList_1_String___(__.acc) && (function()
           {
-            var _577;
-            return next(_577);
+            var _589;
+            return next(_589);
           })());
         })(impl, unitVar1);
       }), Reset: (function(unitVar1)

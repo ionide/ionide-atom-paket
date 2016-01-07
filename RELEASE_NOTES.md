@@ -1,3 +1,6 @@
+### 2.2.4 - 07.01.2016
+* Update path handlings
+
 ### 2.2.3 - 04.12.2015
 * Fix null input for handle function
 
