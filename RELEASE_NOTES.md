@@ -1,3 +1,6 @@
+### 2.2.5 - 26.01.2016
+* Fix process spawning
+
 ### 2.2.4 - 07.01.2016
 * Update path handlings
 
