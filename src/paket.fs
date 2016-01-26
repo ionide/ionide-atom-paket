@@ -77,22 +77,25 @@ module PaketService =
                 view.addClass("icon-flame") |> ignore
         )
 
+    let private getCwd () =
+        try
+            let t = Globals.atom.project.getPaths().[0]
+            if Globals.existsSync t then
+                t
+            else
+                null
+        with
+        | _ -> null
+
     let spawn location (cmd : string) =
         let cmd' = cmd.Split(' ');
-        let cwd =
-            try
-                let t = Globals.atom.project.getPaths().[0]
-                if Globals.existsSync t then
-                    t
-                else
-                    null
-            with
-            | _ -> null
+        let cwd = getCwd ()
+
         let options =
             try
                 {cwd = cwd} |> unbox<AnonymousType599>
             with
-            | _ -> null |> unbox<AnonymousType599>
+            | _ -> {cwd = null} |> unbox<AnonymousType599>
         try
 
             let procs = if Globals._process.platform.StartsWith("win") then
@@ -112,20 +115,13 @@ module PaketService =
 
     let spawnSilent location (cmd : string) =
         let cmd' = cmd.Split(' ');
-        let cwd =
-            try
-                let t = Globals.atom.project.getPaths().[0]
-                if Globals.existsSync t then
-                    t
-                else
-                    null
-            with
-            | _ -> null
+        let cwd = getCwd ()
+
         let options =
             try
                 {cwd = cwd} |> unbox<AnonymousType599>
             with
-            | _ -> null |> unbox<AnonymousType599>
+            | _ -> {cwd = null} |> unbox<AnonymousType599>
         try
             let procs = if Globals._process.platform.StartsWith("win") then
                             Globals.spawn(location, cmd', options)
@@ -144,20 +140,7 @@ module PaketService =
 
 
     let exec location cmd handler =
-        let cwd =
-            try
-                let t = Globals.atom.project.getPaths().[0]
-                if Globals.existsSync t then
-                    t
-                else
-                    null
-            with
-            | _ -> null
-        let options =
-            try
-                {cwd = cwd} |> unbox<AnonymousType600>
-            with
-            | _ -> null |> unbox<AnonymousType600>
+        let options = {cwd = getCwd()} |> unbox<AnonymousType600>
         try
 
             let child =
