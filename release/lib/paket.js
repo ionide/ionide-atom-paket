@@ -2,6 +2,7 @@ var CompositeDisposable = require('atom').CompositeDisposable;
 var child_process = require('child_process');
 window.$ = require('jquery');
 var fs = require('fs');
+var path = require('path');
 var atomSpaceView = require('atom-space-pen-views');
 
 function wrappedFunScript() { 
