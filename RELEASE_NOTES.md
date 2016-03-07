@@ -1,3 +1,6 @@
+### 2.2.6 - 07.03.2016
+* Fix missing require
+
 ### 2.2.5 - 26.01.2016
 * Fix process spawning
 
