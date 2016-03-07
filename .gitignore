@@ -55,3 +55,4 @@ paket.exe
 paket.js
 /release/lib/paket.js
 release/lib
+/.vscode
