@@ -56,27 +56,31 @@
         'match': '//.*$'
         'name': 'comment.line.double-slash.fsharp'
       }
+      {
+        'match': '#.*$'
+        'name': 'comment.line.sharp.paket'
+      }
     ]
   'constants':
     'patterns': [
       {
-        'match': '\\b-?[0-9][0-9_]*((\\.{1}([0-9][0-9_]*([eE][+-]??[0-9][0-9_]*)?)?)|([eE][+-]??[0-9][0-9_]*))\\b'
-        'name': 'constant.numeric.floating-point.paket'
+        'match': '\\b[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?(-[.0-9A-Za-z-]+)?(\\+[.0-9A-Za-z-]+)?\\b'
+        'name': 'constant.numeric.version-number.paket'
       }
       {
         'match': '\\b(-?((0(x|X)[0-9a-fA-F][0-9a-fA-F_]*)|(0(o|O)[0-7][0-7_]*)|(0(b|B)[01][01_]*)|([0-9][0-9_]*)))\\b'
-        'name': 'constant.numeric.integer.nativeint.paket'
-      }
-      {
-        'match': '\\b(http|https)://[^ ]*\\b'
         'name': 'constant.numeric.integer.nativeint.paket'
       }
     ]
   'keywords':
     'patterns': [
       {
-        'match': '\\b(source|github|nuget|gist|http|group|strategy)\\b'
+        'match': '\\b(source|github|nuget|gist|http|group|strategy|framework|references|content|copy_content_to_output_dir|import_targets|copy_local|redirects|lowest_matching|version_in_path|prerelease)\\b'
         'name': 'keyword.other.fsharp'
+      }
+      {
+        'match': '(~>|>=|<=|=|<|>)'
+        'name': 'keyword.operator.paket'
       }
     ]
   'strings':
@@ -105,6 +109,10 @@
             'name': 'invalid.illeagal.character.string.paket'
           }
         ]
+      }
+      {
+        'match': '\\b(http|https)://[^ ]*\\b'
+        'name': 'string.url.paket'
       }
     ]
 'scopeName': 'source.paket'

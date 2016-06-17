@@ -60,15 +60,11 @@
   'constants':
     'patterns': [
       {
-        'match': '\\b-?[0-9][0-9_]*((\\.{1}([0-9][0-9_]*([eE][+-]??[0-9][0-9_]*)?)?)|([eE][+-]??[0-9][0-9_]*))\\b'
-        'name': 'constant.numeric.floating-point.paket'
+        'match': '\\b[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?(-[.0-9A-Za-z-]+)?(\\+[.0-9A-Za-z-]+)?\\b'
+        'name': 'constant.numeric.version-number.paket'
       }
       {
         'match': '\\b(-?((0(x|X)[0-9a-fA-F][0-9a-fA-F_]*)|(0(o|O)[0-7][0-7_]*)|(0(b|B)[01][01_]*)|([0-9][0-9_]*)))\\b'
-        'name': 'constant.numeric.integer.nativeint.paket'
-      }
-      {
-        'match': '\\b(http|https)://[^ ]*\\b'
         'name': 'constant.numeric.integer.nativeint.paket'
       }
     ]
@@ -77,6 +73,14 @@
       {
         'match': '\\b(GITHUB|NUGET|GIST|HTTP|GROUP|specs|remote)\\b'
         'name': 'keyword.other.fsharp'
+      }
+      {
+        'match': '\\b(framework|import_targets|content|redirects)\\b'
+        'name': 'keyword.other.fsharp'
+      }
+      {
+        'match': '(~>|>=|<=|=|<|>)'
+        'name': 'keyword.operator.paket'
       }
     ]
   'strings':
@@ -105,6 +109,10 @@
             'name': 'invalid.illeagal.character.string.paket'
           }
         ]
+      }
+      {
+        'match': '\\b(http|https)://[^ ]*\\b'
+        'name': 'string.url.paket'
       }
     ]
 'scopeName': 'source.paket'
