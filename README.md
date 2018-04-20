@@ -1,3 +1,5 @@
+## [Project is deprecated, we suggest to use VSCode version of Ionide instead]
+
 # Ionide-Paket
 
 It's part of [Ionide](http://ionide.io) plugin suite.
